@@ -65,13 +65,13 @@ Require the gem in your code:
 
 ## Would be nice
 
-    [ ] Handle parsing a zone file that uses more then one $ORIGIN statement.
+    [ ] Handle parsing a zone file that uses more then one $ORIGIN directive.
     [ ] Validation, error checking...
         [ ] Only one SOA per zone.
         [ ] CNAMEs can't use a label of `@`.
 
     [ ] Ability to 'include' defaults/records into a zone.
-        This may or may not want to mean supporting the `$INCLUDE` statement.
+        This may or may not want to mean supporting the `$INCLUDE` directive.
 
 ## At some point; low priority
 
@@ -93,8 +93,9 @@ Require the gem in your code:
 # Notes
 
 - RR Format: `[<TTL>] [<class>] <type> <RDATA>`
-- A DNS zone is built from RR's and a couple of other special statements.
+- A DNS zone is built from RR's and a couple of other special directives.
 - If zone file does not include $ORIGIN, it will be inferred by the `zone "<zone-name>" {}` clause from bind.conf
   In general we should always explicitly define an $ORIGIN directive unless there is a very good reason not to.
 - [RFC 1035 - Domain Names - Implementation and Specification](http://www.ietf.org/rfc/rfc1035.txt)
+- [RFC 2308 - Negative Caching of DNS Queries (DNS NCACHE)](http://www.ietf.org/rfc/rfc2308.txt)
 - [RFC 3596 - DNS Extensions to Support IP Version 6](http://www.ietf.org/rfc/rfc3596.txt)
