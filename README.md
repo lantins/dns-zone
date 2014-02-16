@@ -35,6 +35,9 @@ Require the gem in your code:
     # output as dns zone file
     zone.to_zone_file
 
+
+# Development
+
 ## Development Commands
 
     # install external gem dependencies first
@@ -49,9 +52,49 @@ Require the gem in your code:
     # watch for changes and run development commands (tests, documentation, etc)
     bundle exec guard
 
-## Notes
+# TODO
+
+## Must have
+
+    [ ] Ability to load a whole zone
+    [ ] Add support for RR Type: SOA
+    [ ] Add support for RR Type: PTR
+    [ ] Add support for RR Type: SPF
+    [ ] Add support for RR Type: LOC
+    [ ] Add support for RR Type: HINFO
+
+## Would be nice
+
+    [ ] Handle parsing a zone file that uses more then one $ORIGIN statement.
+    [ ] Validation, error checking...
+        [ ] Only one SOA per zone.
+        [ ] CNAMEs can't use a label of `@`.
+
+    [ ] Ability to 'include' defaults/records into a zone.
+        This may or may not want to mean supporting the `$INCLUDE` statement.
+
+## At some point; low priority
+
+    [ ] Configuration options:
+        [ ] spaces/tabs used between RR params in zone file output
+        [ ] time format to use (seconds or bind time format (e.g. 1d))
+        [ ] add comments to explain TTL's that are in seconds
+    [ ] Ability to add comment to RR (n.b. currently we strip comments when parsing)
+    [ ] Add support for RR Type: DNAME
+    [ ] Add support for RR Type: DNSKEY
+    [ ] Add support for RR Type: DS
+    [ ] Add support for RR Type: KEY
+    [ ] Add support for RR Type: NSEC
+    [ ] Add support for RR Type: RRSIG
+    [ ] Add support for RR Type: NAPTR
+    [ ] Add support for RR Type: RP
+    [ ] Add support for RR Type: RT
+
+# Notes
 
 - RR Format: `[<TTL>] [<class>] <type> <RDATA>`
 - A DNS zone is built from RR's and a couple of other special statements.
+- If zone file does not include $ORIGIN, it will be inferred by the `zone "<zone-name>" {}` clause from bind.conf
+  In general we should always explicitly define an $ORIGIN directive unless there is a very good reason not to.
 - [RFC 1035 - Domain Names - Implementation and Specification](http://www.ietf.org/rfc/rfc1035.txt)
 - [RFC 3596 - DNS Extensions to Support IP Version 6](http://www.ietf.org/rfc/rfc3596.txt)
