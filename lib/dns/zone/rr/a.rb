@@ -1,9 +1,12 @@
+# `A` resource record.
+#
+# RFC 1035
 class DNS::Zone::RR::A < DNS::Zone::RR::Record
 
   attr_accessor :address
 
   def to_s
-    parts = generic_prefix
+    parts = general_prefix
     parts << address
     parts.join(' ')
   end

@@ -1,6 +1,8 @@
 module DNS
   class Zone
 
+    # The module containes resource record types supported by this gem.
+    # The #{load} method will convert RR string data into a Ruby class.
     module RR
 
       RX_TTL = /(?<ttl>\d+[wdmhs]?)?/i
@@ -8,6 +10,12 @@ module DNS
       RX_TYPE = /(?<type>A|AAAA|CNAME|MX|NS|SRV|TXT)\s{1}/i
       RX_RR = /^(?<label>\S+|\s{1})\s*#{RX_TTL}\s*#{RX_KLASS}\s*#{RX_TYPE}\s*(?<rdata>[\s\S]*)$/i
 
+      # Load RR string data and return an instance representing the RR.
+      #
+      # @param string [String] RR ASCII string data
+      # @param options [Hash] additional data required to correctly parse a 'whole' zone
+      # @option options [String] :last_label The last label used by the previous RR
+      # @return [Object]
       def self.load(string, options = {})
         # strip comments, unless its escaped.
         string.gsub!(/(?<!\\);.*/o, "");

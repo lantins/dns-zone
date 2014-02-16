@@ -1,3 +1,7 @@
+# Parent class of all RR types, common resource record code lives here.
+# Is responsible for building a Ruby object given a RR string.
+#
+# @abstract Each RR TYPE should subclass and override: {#load} and #{to_s} 
 class DNS::Zone::RR::Record
 
   attr_accessor :label, :ttl
@@ -8,13 +12,26 @@ class DNS::Zone::RR::Record
     @klass = 'IN'
   end
 
+  # FIXME: should we just: `def type; 'SOA'; end` rather then do the class name convension?
+  #
+  # Figures out TYPE of RR using class name.
+  # This means the class name _must_ match the RR ASCII TYPE.
+  #
+  # When called directly on the parent class (that you should never do), it will
+  #   return the string as `<type>`, for use with internal tests.
+  #
+  # @return [String] the RR type
   def type
     name = self.class.name.split('::').last
     return '<type>' if name == 'Record'
     name
   end
 
-  def generic_prefix
+  # Returns 'general' prefix (in parts) that come before the RDATA.
+  # Used by all RR types, generates: `[<label>] [<ttl>] [<class>] <type>`
+  #
+  # @return [Array<String>] rr prefix parts
+  def general_prefix
     parts = []
     parts << label
     parts << ttl if ttl
@@ -23,15 +40,28 @@ class DNS::Zone::RR::Record
     parts
   end
 
+  # Build RR zone file output.
+  #
+  # @return [String] RR zone file output
   def to_s
-    generic_prefix.join(' ')
+    general_prefix.join(' ')
   end
 
-  def load(string)
+  # @abstract Override to update instance with RR type spesific data.
+  # @param string [String] RR ASCII string data
+  # @param options [Hash] additional data required to correctly parse a 'whole' zone
+  # @option options [String] :last_label The last label used by the previous RR
+  # @return [Object]
+  def load(string, options = {})
     raise 'must be implemented by subclass'
   end
 
-  def load_general_and_get_rdata(string, options)
+  # Load 'general' RR data/params and return the remaining RDATA for further parsing.
+  #
+  # @param string [String] RR ASCII string data
+  # @param options [Hash] additional data required to correctly parse a 'whole' zone
+  # @return [String] remaining RDATA
+  def load_general_and_get_rdata(string, options = {})
     # strip comments, unless its escaped.
     string.gsub!(/(?<!\\);.*/o, "");
 
