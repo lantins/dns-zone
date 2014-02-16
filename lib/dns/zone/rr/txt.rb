@@ -14,7 +14,8 @@ class DNS::Zone::RR::TXT < DNS::Zone::RR::Record
   def load(string, options = {})
     rdata = load_general_and_get_rdata(string, options)
     return nil unless rdata
-    @text = rdata.match(/"(.*)"/)[1]
+    # extract text from within quotes; allow multiple quoted strings; ignore escaped quotes
+    @text = rdata.scan(/"((?:[^"\\]+|\\.)*)"/).join
     self
   end
 
