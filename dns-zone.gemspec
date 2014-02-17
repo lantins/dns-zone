@@ -6,7 +6,8 @@ spec = Gem::Specification.new do |s|
   s.version             = DNS::Zone::Version
   s.date                = Time.now.strftime('%Y-%m-%d')
   s.summary             = 'A Ruby library for building and parsing DNS zone files.'
-  #s.homepage            = 'https://github.com/lantins/dns-zone'
+  s.license             = 'MIT'
+  s.homepage            = 'https://github.com/lantins/dns-zone'
   s.authors             = ['Luke Antins']
   s.email               = ['luke@lividpenguin.com']
 
@@ -14,8 +15,8 @@ spec = Gem::Specification.new do |s|
   s.files               = %w(Rakefile README.md HISTORY.md Gemfile Guardfile dns-zone.gemspec)
   s.files              += Dir.glob('{test/**/*,lib/**/*}')
   s.require_paths       = ['lib']
-  s.executables         = ['dns-zone']
-  s.default_executable  = 'dns-zone'
+  #s.executables         = ['dns-zone']
+  #s.default_executable  = 'dns-zone'
 
   # min ruby version
   s.required_ruby_version = ::Gem::Requirement.new("~> 1.9")
@@ -23,15 +24,14 @@ spec = Gem::Specification.new do |s|
   # cross platform gem dependencies
   #s.add_dependency('gli')
   #s.add_dependency('paint')
-  s.add_development_dependency('bundler')
-  s.add_development_dependency('rake')
-  s.add_development_dependency('minitest')
-  s.add_development_dependency('simplecov', '~> 0.7.1')
-  s.add_development_dependency('yard')
-  s.add_development_dependency('inch')
-
-  s.add_development_dependency('guard-minitest')
-  s.add_development_dependency('guard-bundler')
+  s.add_development_dependency('bundler', '~> 0')
+  s.add_development_dependency('rake', '~> 0')
+  s.add_development_dependency('minitest', '~> 0')
+  s.add_development_dependency('simplecov', '~> 0.7')
+  s.add_development_dependency('yard', '~> 0')
+  s.add_development_dependency('inch', '~> 0')
+  s.add_development_dependency('guard-minitest', '~> 0')
+  s.add_development_dependency('guard-bundler', '~> 0')
 
   # long description.
   s.description       = <<-EOL
