@@ -3,6 +3,12 @@ dns-zone
 
 A Ruby library for building and parsing DNS zone files.
 
+# WARNING --- ALPHA SOFTWARE
+
+The project/library should be seen as 'alpha' software for the moment.
+The basics are comming together very well, but once built some refactoring will
+be done to tidy up the implementation where possible.
+
 ## Installation
 
 Add this line to your Gemfile:
