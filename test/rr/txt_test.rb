@@ -39,9 +39,6 @@ class RR_TXT_Test < DNS::Zone::TestCase
   def test_load_multiple_strings_with_quotes
     rr = DNS::Zone::RR::TXT.new.load('txtrecord IN TXT "part1 " "we have \"double\" quotes" " part3"')
     assert_equal %q{part1 we have \"double\" quotes part3}, rr.text
-
-    puts rr.text
   end
-
 
 end

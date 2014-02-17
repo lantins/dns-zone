@@ -11,4 +11,11 @@ class DNS::Zone::RR::NS < DNS::Zone::RR::Record
     parts.join(' ')
   end
 
+  def load(string, options = {})
+    rdata = load_general_and_get_rdata(string, options)
+    return nil unless rdata
+    @nameserver = rdata
+    self
+  end
+
 end

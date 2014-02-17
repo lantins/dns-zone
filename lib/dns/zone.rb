@@ -9,9 +9,10 @@ module DNS
   # This is also the primary namespace for the `dns-zone` gem.
   class Zone
 
-    attr_accessor :ttl, :origin
+    attr_accessor :ttl, :origin, :records
 
     def initialize
+      @records = []
     end
 
     # FROM RFC:
@@ -24,22 +25,81 @@ module DNS
     #     with a ";" (semicolon). 
 
     def self.load(string)
-      # loop over each line, remove comments, a single RR may span multiple lines
-      string.lines.each do |line|
-        puts "parsing --- : #{line}"
+      # get entries
+      entries = self.extract_entries(string)
 
-        # strip comments, unless its escaped.
-        line.gsub!(/(?<!\\);.*/o, "");
-        captures = line.match(DNS::Zone::RR::RX_RR)
-        p captures
-        #return nil unless captures
+      instance = self.new
+
+      entries.each do |entry|
+        if entry =~ /\$(ORIGIN|TTL)\s+(.+)/
+          instance.ttl    = $2 if $1 == 'TTL'
+          instance.origin = $2 if $1 == 'ORIGIN'
+          next
+        end
+
+        if entry =~ DNS::Zone::RR::RX_RR
+          rec = DNS::Zone::RR.load(entry)
+          instance.records << rec if rec
+        end
+
       end
 
       # read in special statments like $TTL and $ORIGIN
       # parse each RR and create a Ruby object for it
-      return self.new
+      return instance
+    end
+
+    def self.extract_entries(string)
+      entries = []
+      mode = :line
+      entry = ''
+
+      parentheses_ref_count = 0
+
+      string.lines.each do |line|
+        # strip comments unless escaped
+        line = line.gsub(/(?<!\\);.*/o, '').chomp
+
+        next if line.gsub(/\s+/, '').empty?
+
+        # append to entry line
+        entry << line
+
+        quotes = entry.count('"')
+        has_quotes = quotes > 0
+
+        parentheses = entry.count('()')
+        has_parentheses = parentheses > 0
+
+        if has_quotes
+          character_strings = entry.scan(/("(?:[^"\\]+|\\.)*")/).join(' ')
+          without = entry.gsub(/"((?:[^"\\]+|\\.)*)"/, '')
+          parentheses_ref_count = without.count('(') - without.count(')')
+        else
+          parentheses_ref_count = entry.count('(') - entry.count(')')
+        end
+
+        # are parentheses balanced?
+        if parentheses_ref_count == 0
+          if has_quotes
+            without.gsub!(/[()]/, '')
+            without.gsub!(/[ ]{2,}/, '  ')
+            #entries << (without + character_strings)
+            entry = (without + character_strings)
+          else
+            entry.gsub!(/[()]/, '')
+            entry.gsub!(/[ ]{2,}/, '  ')
+            entry.gsub!(/[ ]+$/, '')
+            #entries << entry
+          end
+          entries << entry
+          entry = ''
+        end
+
+      end
+
+      return entries
     end
 
   end
-
 end

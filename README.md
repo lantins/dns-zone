@@ -35,7 +35,6 @@ Require the gem in your code:
     # output as dns zone file
     zone.to_zone_file
 
-
 # Development
 
 ## Development Commands
@@ -57,7 +56,7 @@ Require the gem in your code:
 ## Must have
 
     [ ] Ability to load a whole zone
-    [ ] Add support for RR Type: SOA
+    [x] Add support for RR Type: SOA
     [ ] Add support for RR Type: PTR
     [ ] Add support for RR Type: SPF
     [ ] Add support for RR Type: LOC
