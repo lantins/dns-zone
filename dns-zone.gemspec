@@ -26,7 +26,7 @@ spec = Gem::Specification.new do |s|
   #s.add_dependency('paint')
   s.add_development_dependency('bundler',        '~> 1.0')
   s.add_development_dependency('rake',           '~> 10.0')
-  s.add_development_dependency('minitest',       '~> 3.0')
+  s.add_development_dependency('minitest',       '~> 5.0')
   s.add_development_dependency('simplecov',      '~> 0.0')
   s.add_development_dependency('yard',           '~> 0.0')
   s.add_development_dependency('inch',           '~> 0.0')
