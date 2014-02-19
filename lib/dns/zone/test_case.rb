@@ -16,7 +16,6 @@ end
 
 # --- load our dependencies using bundler --------------------------------------
 require 'bundler/setup'
-Bundler.setup
 require 'minitest/autorun'
 require 'minitest/pride'
 
