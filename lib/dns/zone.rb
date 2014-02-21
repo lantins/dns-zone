@@ -15,6 +15,15 @@ module DNS
       @records = []
     end
 
+    def dump
+      content = []
+      @records.each do |rr|
+        content << rr.dump
+      end
+
+      content.join("\n") << "\n"
+    end
+
     # FROM RFC:
     #     The format of these files is a sequence of entries.  Entries are
     #     predominantly line-oriented, though parentheses can be used to continue

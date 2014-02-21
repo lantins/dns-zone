@@ -1,7 +1,7 @@
 # Parent class of all RR types, common resource record code lives here.
 # Is responsible for building a Ruby object given a RR string.
 #
-# @abstract Each RR TYPE should subclass and override: {#load} and #{to_s} 
+# @abstract Each RR TYPE should subclass and override: {#load} and #{dump} 
 class DNS::Zone::RR::Record
 
   attr_accessor :label, :ttl
@@ -43,7 +43,7 @@ class DNS::Zone::RR::Record
   # Build RR zone file output.
   #
   # @return [String] RR zone file output
-  def to_s
+  def dump
     general_prefix.join(' ')
   end
 

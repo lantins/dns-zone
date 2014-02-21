@@ -2,46 +2,68 @@ require 'dns/zone/test_case'
 
 class ZoneTest < DNS::Zone::TestCase
 
-  ZONE_EXAMPLE_SIMPLE =<<-EOL
+  # example zone file, with a couple of things that could trip us up.
+  ZONE_FILE_EXAMPLE =<<-EOL
 $ORIGIN lividpenguin.com.
 $TTL 3d
-@    IN  SOA  ns0.lividpenguin.com. luke.lividpenguin.com. (
-                                                             2013101406 ; zone serial number
-                                                             12h        ; refresh ttl
-                                                             15m        ; retry ttl
-                                                             3w         ; expiry ttl
-                                                             3h         ; minimum ttl
-                                                           )
+@           IN  SOA  ns0.lividpenguin.com. luke.lividpenguin.com. (
+                           2013101406 ; zone serial number
+                           12h        ; refresh ttl
+                           15m        ; retry ttl
+                           3w         ; expiry ttl
+                           3h         ; minimum ttl
+                         )
 
-; a more difficult ; comment ( its trying to break things!
+; a more difficult ; comment ( that is trying to break things!
 
-@    IN  NS   ns0.lividpenguin.com.
-@    IN  NS   ns1.lividpenguin.com.
-@    IN  NS   ns2.lividpenguin.com.
+@           IN  NS    ns0.lividpenguin.com.
+@           IN  NS    ns1.lividpenguin.com.
+@           IN  NS    ns2.lividpenguin.com.
 
-@    IN  A    77.75.105.197
-@    IN  AAAA 2a01:348::6:4d4b:69c5:0:1
+@           IN  A     77.75.105.197
+@           IN  AAAA  2a01:348::6:4d4b:69c5:0:1
 
-foo  IN  TXT "part1""part2"
-bar  IN  TXT ("part1 "
-              "part2 "
-              "part3")
+foo         IN  TXT   "part1""part2"
+bar         IN  TXT   ("part1 "
+                       "part2 "
+                       "part3")
+
+longttl  5d IN A      10.1.2.3
+
 EOL
 
+  # more basic zone file example
+  ZONE_FILE_BASIC_EXAMPLE =<<-EOL
+@ IN SOA ns0.lividpenguin.com. luke.lividpenguin.com. ( 2013101406 12h 15m 3w 3h )
++@ IN NS ns0.lividpenguin.com.
++@ IN A 77.75.105.197
+EOL
   def test_create_new_instance
     assert DNS::Zone.new
   end
 
-  def test_load_simple_zone
-    zone = DNS::Zone.load(ZONE_EXAMPLE_SIMPLE)
+  def test_zone_file_to_ruby
+    # load example dns master zone file.
+    zone = DNS::Zone.load(ZONE_FILE_EXAMPLE)
+
+    # test attributes are correct.
     assert_equal '3d', zone.ttl, 'check ttl matches example input'
     assert_equal 'lividpenguin.com.', zone.origin, 'check origin matches example input'
-    assert_equal 8, zone.records.length, 'we should have 8 records (including SOA)'
+    assert_equal 9, zone.records.length, 'we should have 8 records (including SOA)'
 
-    p ''
-    zone.records.each do |rec|
-      p rec
-    end
+    #p ''
+    #zone.records.each do |rec|
+    #  p rec
+    #end
+  end
+
+  def test_ruby_to_zone_file
+    # load zone file.
+    zone = DNS::Zone.load(ZONE_FILE_BASIC_EXAMPLE)
+    # dump zone file.
+    dump = zone.dump
+    # check input matches output.
+    assert_equal ZONE_FILE_BASIC_EXAMPLE, dump, 'loaded zone file should match dumped zone file'
   end
 
   def test_extract_entry_from_one_line

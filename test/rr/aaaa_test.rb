@@ -7,7 +7,7 @@ class RR_AAAA_Test < DNS::Zone::TestCase
 
     # ensure we can set address parameter
     rr.address = '2001:db8::3'
-    assert_equal '@ IN AAAA 2001:db8::3', rr.to_s
+    assert_equal '@ IN AAAA 2001:db8::3', rr.dump
   end
 
 end

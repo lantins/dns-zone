@@ -6,7 +6,7 @@ class RR_CNAME_Test < DNS::Zone::TestCase
     rr = DNS::Zone::RR::CNAME.new
     rr.label = 'google9d97d7f266ee521d'
     rr.domainname = 'google.com.'
-    assert_equal 'google9d97d7f266ee521d IN CNAME google.com.', rr.to_s
+    assert_equal 'google9d97d7f266ee521d IN CNAME google.com.', rr.dump
   end
 
 end

@@ -6,7 +6,7 @@ class DNS::Zone::RR::MX < DNS::Zone::RR::Record
   attr_accessor :preference
   attr_accessor :exchange
 
-  def to_s
+  def dump
     parts = general_prefix
     parts << preference
     parts << exchange

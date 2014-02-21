@@ -8,11 +8,11 @@ class RR_MX_Test < DNS::Zone::TestCase
     # ensure we can set preference and exchange parameter
     rr.preference = '10'
     rr.exchange = 'mx0.lividpenguin.com.'
-    assert_equal '@ IN MX 10 mx0.lividpenguin.com.', rr.to_s
+    assert_equal '@ IN MX 10 mx0.lividpenguin.com.', rr.dump
 
     rr.preference = '20'
     rr.exchange = 'mx1.lividpenguin.com.'
-    assert_equal '@ IN MX 20 mx1.lividpenguin.com.', rr.to_s
+    assert_equal '@ IN MX 20 mx1.lividpenguin.com.', rr.dump
   end
 
 end

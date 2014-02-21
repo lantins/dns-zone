@@ -7,17 +7,17 @@ class RR_A_Test < DNS::Zone::TestCase
 
     # ensure we can set address parameter
     rr.address = '10.0.1.1'
-    assert_equal '@ IN A 10.0.1.1', rr.to_s
+    assert_equal '@ IN A 10.0.1.1', rr.dump
     rr.address = '10.0.2.2'
-    assert_equal '@ IN A 10.0.2.2', rr.to_s
+    assert_equal '@ IN A 10.0.2.2', rr.dump
 
     # with a label set
     rr.label = 'labelname'
-    assert_equal 'labelname IN A 10.0.2.2', rr.to_s
+    assert_equal 'labelname IN A 10.0.2.2', rr.dump
 
     # with a ttl
     rr.ttl = '4w'
-    assert_equal 'labelname 4w IN A 10.0.2.2', rr.to_s
+    assert_equal 'labelname 4w IN A 10.0.2.2', rr.dump
   end
 
   def test_load

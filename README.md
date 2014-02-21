@@ -42,7 +42,7 @@ Require the gem in your code:
     zone.soa.email = 'hostmaster.lividpenguin.com.'
 
     # output as dns zone file
-    zone.to_zone_file
+    zone.dump
 
 # Development
 

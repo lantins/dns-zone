@@ -11,20 +11,20 @@ class RR_Record_Test < DNS::Zone::TestCase
   def test_rr_record_with_label
     rr = DNS::Zone::RR::Record.new
     rr.label = 'labelname'
-    assert_equal 'labelname IN <type>', rr.to_s
+    assert_equal 'labelname IN <type>', rr.dump
   end
 
   def test_rr_record_with_label_and_ttl
     rr = DNS::Zone::RR::Record.new
     rr.label = 'labelname'
     rr.ttl = '2d'
-    assert_equal 'labelname 2d IN <type>', rr.to_s
+    assert_equal 'labelname 2d IN <type>', rr.dump
   end
 
   def test_rr_record_with_ttl
     rr = DNS::Zone::RR::Record.new
     rr.ttl = '2d'
-    assert_equal '@ 2d IN <type>', rr.to_s
+    assert_equal '@ 2d IN <type>', rr.dump
   end
 
 end

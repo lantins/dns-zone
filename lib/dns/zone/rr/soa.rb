@@ -15,7 +15,7 @@ class DNS::Zone::RR::SOA < DNS::Zone::RR::Record
 
   attr_accessor :nameserver, :email, :serial, :refresh_ttl, :retry_ttl, :expiry_ttl, :minimum_ttl
 
-  def to_s
+  def dump
     parts = general_prefix
     parts << nameserver
     parts << email

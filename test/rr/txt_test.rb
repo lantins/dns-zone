@@ -7,15 +7,15 @@ class RR_TXT_Test < DNS::Zone::TestCase
 
     # ensure we can set text parameter
     rr.text = 'test text'
-    assert_equal '@ IN TXT "test text"', rr.to_s
+    assert_equal '@ IN TXT "test text"', rr.dump
 
     # with a label set
     rr.label = 'labelname'
-    assert_equal 'labelname IN TXT "test text"', rr.to_s
+    assert_equal 'labelname IN TXT "test text"', rr.dump
 
     # with a ttl
     rr.ttl = '2w'
-    assert_equal 'labelname 2w IN TXT "test text"', rr.to_s
+    assert_equal 'labelname 2w IN TXT "test text"', rr.dump
   end
 
   def test_load

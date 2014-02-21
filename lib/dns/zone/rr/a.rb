@@ -5,7 +5,7 @@ class DNS::Zone::RR::A < DNS::Zone::RR::Record
 
   attr_accessor :address
 
-  def to_s
+  def dump
     parts = general_prefix
     parts << address
     parts.join(' ')

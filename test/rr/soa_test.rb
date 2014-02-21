@@ -14,7 +14,7 @@ class RR_SRV_Test < DNS::Zone::TestCase
     rr.retry_ttl = '15m'
     rr.expiry_ttl = '4w'
     rr.minimum_ttl = '30m'
-    assert_equal EXAMPLE_SOA_OUT, rr.to_s
+    assert_equal EXAMPLE_SOA_OUT, rr.dump
   end
 
   def test_load

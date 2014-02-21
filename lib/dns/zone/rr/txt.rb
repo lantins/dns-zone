@@ -5,7 +5,7 @@ class DNS::Zone::RR::TXT < DNS::Zone::RR::Record
 
   attr_accessor :text
 
-  def to_s
+  def dump
     parts = general_prefix
     parts << %Q{"#{text}"}
     parts.join(' ')
