@@ -1,6 +1,9 @@
 dns-zone
 ========
 
+[![Build Status](https://secure.travis-ci.org/lantins/dns-zone.png?branch=master)](http://travis-ci.org/lantins/dns-zone)
+[![Gem Version](https://badge.fury.io/rb/dns-zone.png)](http://badge.fury.io/rb/dns-zone)
+
 A Ruby library for building and parsing DNS zone files.
 
 # WARNING --- ALPHA SOFTWARE
