@@ -107,5 +107,4 @@ EOL
     assert_equal 'maiow IN TXT "purr((maiow)"', entries[0], 'entry should match expected'
   end
 
-
 end
