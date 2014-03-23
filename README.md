@@ -37,7 +37,7 @@ Require the gem in your code:
     zone.origin = 'example.com.'
     # FIXME: not sure what RFC (if any) defines the time formatting
     zone.ttl = '1d'
-    # FIXME: keep DNS style representation? for <domain-name>s and email addresses
+    # FIXME: keep DNS style representation? for <domain-name>s and email addresses (with or without the terminating dot?)
     zone.soa.nameserver = 'ns0.lividpenguin.com.'
     zone.soa.email = 'hostmaster.lividpenguin.com.'
 
@@ -66,6 +66,13 @@ Require the gem in your code:
 
     [ ] Ability to load a whole zone
     [x] Add support for RR Type: SOA
+    [x] Add support for RR Type: NS
+    [x] Add support for RR Type: MX
+    [x] Add support for RR Type: AAAA
+    [x] Add support for RR Type: A
+    [ ] Add support for RR Type: CNAME
+    [x] Add support for RR Type: TXT
+    [ ] Add support for RR Type: SRV
     [ ] Add support for RR Type: PTR
     [ ] Add support for RR Type: SPF
     [ ] Add support for RR Type: LOC
@@ -85,8 +92,8 @@ Require the gem in your code:
 
     [ ] Configuration options:
         [ ] spaces/tabs used between RR params in zone file output
-        [ ] time format to use (seconds or bind time format (e.g. 1d))
-        [ ] add comments to explain TTL's that are in seconds
+        [ ] time format used in output (should parse both formats, seconds or bind time format (e.g. 1d))
+            [ ] add comments to explain TTL's that are in seconds
     [ ] Ability to add comment to RR (n.b. currently we strip comments when parsing)
     [ ] Add support for RR Type: DNAME
     [ ] Add support for RR Type: DNSKEY

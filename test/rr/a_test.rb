@@ -7,6 +7,7 @@ class RR_A_Test < DNS::Zone::TestCase
 
     # ensure we can set address parameter
     rr.address = '10.0.1.1'
+    assert_equal 'A', rr.type
     assert_equal '@ IN A 10.0.1.1', rr.dump
     rr.address = '10.0.2.2'
     assert_equal '@ IN A 10.0.2.2', rr.dump
@@ -20,7 +21,7 @@ class RR_A_Test < DNS::Zone::TestCase
     assert_equal 'labelname 4w IN A 10.0.2.2', rr.dump
   end
 
-  def test_load
+  def test_load_rr__a
     rr = DNS::Zone::RR::A.new.load('@ IN A 127.0.0.1')
     assert_equal '@', rr.label
     assert_equal 'A', rr.type
