@@ -15,4 +15,13 @@ class RR_MX_Test < DNS::Zone::TestCase
     assert_equal '@ IN MX 20 mx1.lividpenguin.com.', rr.dump
   end
 
+  def test_load_rr__mx
+    rr = DNS::Zone::RR::MX.new.load('@ IN MX 20 mx1.lividpenguin.com.')
+    assert_equal '@', rr.label
+    assert_equal 'MX', rr.type
+    assert_equal '20', rr.preference
+    assert_equal 'mx1.lividpenguin.com.', rr.exchange
+  end
+
+
 end

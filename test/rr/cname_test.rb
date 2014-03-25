@@ -9,4 +9,11 @@ class RR_CNAME_Test < DNS::Zone::TestCase
     assert_equal 'google9d97d7f266ee521d IN CNAME google.com.', rr.dump
   end
 
+  def test_load_rr__cname
+    rr = DNS::Zone::RR::CNAME.new.load('foo IN CNAME example.com.')
+    assert_equal 'foo', rr.label
+    assert_equal 'CNAME', rr.type
+    assert_equal 'example.com.', rr.domainname
+  end
+
 end

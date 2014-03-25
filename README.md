@@ -28,10 +28,11 @@ Require the gem in your code:
 
 ## Usage
 
-    DNS::Zone.new
-    DNS::Zone.load(zone_as_string)
-    DNS::Zone::RR.load(rr_as_string)
-    DNS::Zone::RR::A.load(a_rr_as_string)
+### Loading a zone file
+
+    zone = DNS::Zone.load(zone_as_string)
+
+### Creating a new zone programmatically
 
     zone = DNS::Zone.new
     zone.origin = 'example.com.'
@@ -70,7 +71,7 @@ Require the gem in your code:
     [x] Add support for RR Type: MX
     [x] Add support for RR Type: AAAA
     [x] Add support for RR Type: A
-    [ ] Add support for RR Type: CNAME
+    [x] Add support for RR Type: CNAME
     [x] Add support for RR Type: TXT
     [ ] Add support for RR Type: SRV
     [ ] Add support for RR Type: PTR
