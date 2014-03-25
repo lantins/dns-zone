@@ -46,7 +46,7 @@ module DNS
           next
         end
 
-        if entry =~ DNS::Zone::RR::RX_RR
+        if entry =~ DNS::Zone::RR::REGEX_RR
           rec = DNS::Zone::RR.load(entry)
           instance.records << rec if rec
         end

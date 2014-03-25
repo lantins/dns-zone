@@ -3,14 +3,14 @@
 # RFC xxxx
 class DNS::Zone::RR::SOA < DNS::Zone::RR::Record
 
-  RX_SOA_RDATA = %r{
-    (?<nameserver>#{DNS::Zone::RR::RX_DOMAINNAME})\s* # get nameserver domainname
-    (?<email>#{DNS::Zone::RR::RX_DOMAINNAME})\s*      # get mailbox domainname
+  REGEX_SOA_RDATA = %r{
+    (?<nameserver>#{DNS::Zone::RR::REGEX_DOMAINNAME})\s* # get nameserver domainname
+    (?<email>#{DNS::Zone::RR::REGEX_DOMAINNAME})\s*      # get mailbox domainname
     (?<serial>\d+)\s*
-    (?<refresh_ttl>#{DNS::Zone::RR::RX_TTL})\s*
-    (?<retry_ttl>#{DNS::Zone::RR::RX_TTL})\s*
-    (?<expiry_ttl>#{DNS::Zone::RR::RX_TTL})\s*
-    (?<minimum_ttl>#{DNS::Zone::RR::RX_TTL})\s*
+    (?<refresh_ttl>#{DNS::Zone::RR::REGEX_TTL})\s*
+    (?<retry_ttl>#{DNS::Zone::RR::REGEX_TTL})\s*
+    (?<expiry_ttl>#{DNS::Zone::RR::REGEX_TTL})\s*
+    (?<minimum_ttl>#{DNS::Zone::RR::REGEX_TTL})\s*
   }mx
 
   attr_accessor :nameserver, :email, :serial, :refresh_ttl, :retry_ttl, :expiry_ttl, :minimum_ttl
@@ -34,7 +34,7 @@ class DNS::Zone::RR::SOA < DNS::Zone::RR::Record
     rdata = load_general_and_get_rdata(string, options)
     return nil unless rdata
 
-    captures = rdata.match(RX_SOA_RDATA)
+    captures = rdata.match(REGEX_SOA_RDATA)
     return nil unless captures
 
     @nameserver = captures[:nameserver]
@@ -44,7 +44,6 @@ class DNS::Zone::RR::SOA < DNS::Zone::RR::Record
     @retry_ttl = captures[:retry_ttl]
     @expiry_ttl = captures[:expiry_ttl]
     @minimum_ttl = captures[:minimum_ttl]
-
 
     self
   end

@@ -5,11 +5,11 @@ module DNS
     # The #{load} method will convert RR string data into a Ruby class.
     module RR
 
-      RX_TTL = /\d+[wdmhs]?/i
-      RX_KLASS = /(?<klass>IN)?/i
-      RX_TYPE = /(?<type>A|AAAA|CNAME|MX|NS|SOA|SRV|TXT)\s{1}/i
-      RX_RR = /^(?<label>\S+|\s{1})\s*(?<ttl>#{RX_TTL})?\s*#{RX_KLASS}\s*#{RX_TYPE}\s*(?<rdata>[\s\S]*)$/i
-      RX_DOMAINNAME = /\S+\./i
+      REGEX_TTL = /\d+[wdmhs]?/i
+      REGEX_KLASS = /(?<klass>IN)?/i
+      REGEX_TYPE = /(?<type>A|AAAA|CNAME|MX|NS|SOA|SRV|TXT)\s{1}/i
+      REGEX_RR = /^(?<label>\S+|\s{1})\s*(?<ttl>#{REGEX_TTL})?\s*#{REGEX_KLASS}\s*#{REGEX_TYPE}\s*(?<rdata>[\s\S]*)$/i
+      REGEX_DOMAINNAME = /\S+\./i
 
       # Load RR string data and return an instance representing the RR.
       #
@@ -21,7 +21,7 @@ module DNS
         # strip comments, unless its escaped.
         string.gsub!(/(?<!\\);.*/o, "");
 
-        captures = string.match(RX_RR)
+        captures = string.match(REGEX_RR)
         return nil unless captures
 
         case captures[:type]

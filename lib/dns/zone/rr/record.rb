@@ -65,7 +65,7 @@ class DNS::Zone::RR::Record
     # strip comments, unless its escaped.
     string.gsub!(/(?<!\\);.*/o, "");
 
-    captures = string.match(DNS::Zone::RR::RX_RR)
+    captures = string.match(DNS::Zone::RR::REGEX_RR)
     return nil unless captures
 
     if captures[:label] == ' '
