@@ -23,5 +23,4 @@ class RR_MX_Test < DNS::Zone::TestCase
     assert_equal 'mx1.lividpenguin.com.', rr.exchange
   end
 
-
 end

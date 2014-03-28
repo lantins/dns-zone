@@ -82,12 +82,12 @@ Require the gem in your code:
 ## Would be nice
 
     [ ] Handle parsing a zone file that uses more then one $ORIGIN directive.
-    [ ] Validation, error checking...
+    [ ] Basic validation, error checking:
         [ ] Only one SOA per zone.
         [ ] CNAMEs can't use a label of `@`.
 
     [ ] Ability to 'include' defaults/records into a zone.
-        This may or may not want to mean supporting the `$INCLUDE` directive.
+        This may or may not mean supporting the `$INCLUDE` directive.
 
 ## At some point; low priority
 

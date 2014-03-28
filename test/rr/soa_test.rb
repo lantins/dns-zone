@@ -5,7 +5,7 @@ class RR_SRV_Test < DNS::Zone::TestCase
   EXAMPLE_SOA_IN  = '@ IN SOA ns0.lividpenguin.com. luke.lividpenguin.com. 2014021601 3h 15m 4w 30m'
   EXAMPLE_SOA_OUT = '@ IN SOA ns0.lividpenguin.com. luke.lividpenguin.com. ( 2014021601 3h 15m 4w 30m )'
 
-  def test_build
+  def test_build_rr__soa
     rr = DNS::Zone::RR::SOA.new
     rr.nameserver = 'ns0.lividpenguin.com.'
     rr.email = 'luke.lividpenguin.com.'
@@ -17,7 +17,7 @@ class RR_SRV_Test < DNS::Zone::TestCase
     assert_equal EXAMPLE_SOA_OUT, rr.dump
   end
 
-  def test_load
+  def test_load_rr__soa
     rr = DNS::Zone::RR::SOA.new.load(EXAMPLE_SOA_IN)
     assert_equal '@', rr.label
     assert_equal 'SOA', rr.type
