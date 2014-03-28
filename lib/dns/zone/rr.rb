@@ -7,7 +7,7 @@ module DNS
 
       REGEX_TTL = /\d+[wdmhs]?/i
       REGEX_KLASS = /(?<klass>IN)?/i
-      REGEX_TYPE = /(?<type>A|AAAA|CNAME|MX|NS|SOA|SRV|TXT)\s{1}/i
+      REGEX_TYPE = /(?<type>A|AAAA|CNAME|MX|NS|SOA|SRV|TXT|PTR)\s{1}/i
       REGEX_RR = /^(?<label>\S+|\s{1})\s*(?<ttl>#{REGEX_TTL})?\s*#{REGEX_KLASS}\s*#{REGEX_TYPE}\s*(?<rdata>[\s\S]*)$/i
       REGEX_DOMAINNAME = /\S+\./i
 
@@ -42,6 +42,7 @@ module DNS
       autoload :CNAME,  'dns/zone/rr/cname'
       autoload :MX,     'dns/zone/rr/mx'
       autoload :NS,     'dns/zone/rr/ns'
+      autoload :PTR,    'dns/zone/rr/ptr'
       autoload :SOA,    'dns/zone/rr/soa'
       autoload :SRV,    'dns/zone/rr/srv'
       autoload :TXT,    'dns/zone/rr/txt'

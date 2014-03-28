@@ -65,7 +65,7 @@ Require the gem in your code:
 
 ## Must have
 
-    [ ] Ability to load a whole zone
+    [x] Ability to load a zone made of multiple RR's
     [x] Add support for RR Type: SOA
     [x] Add support for RR Type: NS
     [x] Add support for RR Type: MX
@@ -73,7 +73,7 @@ Require the gem in your code:
     [x] Add support for RR Type: A
     [x] Add support for RR Type: CNAME
     [x] Add support for RR Type: TXT
-    [ ] Add support for RR Type: SRV
+    [x] Add support for RR Type: SRV
     [ ] Add support for RR Type: PTR
     [ ] Add support for RR Type: SPF
     [ ] Add support for RR Type: LOC
