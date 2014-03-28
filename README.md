@@ -85,6 +85,10 @@ Require the gem in your code:
     [ ] Basic validation, error checking:
         [ ] Only one SOA per zone.
         [ ] CNAMEs can't use a label of `@`.
+        [ ] PTR zones have some extra conditions:
+            [ ] labels cant be repeted
+            [ ] names should end in a dot
+            [ ] IPv4 and IPv6 cant be mixed
 
     [ ] Ability to 'include' defaults/records into a zone.
         This may or may not mean supporting the `$INCLUDE` directive.
