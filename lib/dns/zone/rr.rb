@@ -27,9 +27,13 @@ module DNS
         case captures[:type]
         when 'A' then A.new.load(string, options)
         when 'AAAA' then AAAA.new.load(string, options)
-        when 'TXT' then TXT.new.load(string, options)
-        when 'SOA' then SOA.new.load(string, options)
+        when 'CNAME' then CNAME.new.load(string, options)
+        when 'MX' then MX.new.load(string, options)
         when 'NS' then NS.new.load(string, options)
+        when 'PTR' then PTR.new.load(string, options)
+        when 'SOA' then SOA.new.load(string, options)
+        when 'SRV' then SRV.new.load(string, options)
+        when 'TXT' then TXT.new.load(string, options)
         else
           raise 'Unknown RR Type'          
         end

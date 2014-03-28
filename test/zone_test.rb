@@ -20,6 +20,9 @@ $TTL 3d
 @           IN  NS    ns1.lividpenguin.com.
 @           IN  NS    ns2.lividpenguin.com.
 
+@           IN  MX 10 mx0.lividpenguin.com.
+@           IN  MX 20 mx1.lividpenguin.com.
+
 @           IN  A     77.75.105.197
 @           IN  AAAA  2a01:348::6:4d4b:69c5:0:1
 
@@ -29,6 +32,14 @@ bar         IN  TXT   ("part1 "
                        "part3")
 
 longttl  5d IN A      10.1.2.3
+
+cake        IN  CNAME the.cake.is.a.lie.com.
+
+xmpp        IN  SRV 5 0 5269 xmpp-server.google.com.
+
+; a record to be expanded
+
+@           IN  NS    ns3
 
 EOL
 
@@ -49,7 +60,7 @@ EOL
     # test attributes are correct.
     assert_equal '3d', zone.ttl, 'check ttl matches example input'
     assert_equal 'lividpenguin.com.', zone.origin, 'check origin matches example input'
-    assert_equal 9, zone.records.length, 'we should have 8 records (including SOA)'
+    assert_equal 14, zone.records.length, 'we should have multiple records (including SOA)'
 
     #p ''
     #zone.records.each do |rec|
