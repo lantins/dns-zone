@@ -4,16 +4,16 @@
 class DNS::Zone::RR::MX < DNS::Zone::RR::Record
 
   REGEX_MX_RDATA = %r{
-    (?<preference>\d+)\s*
+    (?<priority>\d+)\s*
     (?<exchange>#{DNS::Zone::RR::REGEX_DOMAINNAME})\s*
   }mx
 
-  attr_accessor :preference
+  attr_accessor :priority
   attr_accessor :exchange
 
   def dump
     parts = general_prefix
-    parts << preference
+    parts << priority
     parts << exchange
     parts.join(' ')
   end
@@ -25,7 +25,7 @@ class DNS::Zone::RR::MX < DNS::Zone::RR::Record
     captures = rdata.match(REGEX_MX_RDATA)
     return nil unless captures
 
-    @preference = captures[:preference]
+    @priority = captures[:priority].to_i
     @exchange = captures[:exchange]
     self
   end
