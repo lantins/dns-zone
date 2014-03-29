@@ -1,6 +1,6 @@
 # `SRV` resource record.
 #
-# RFC xxxx
+# RFC 2782
 class DNS::Zone::RR::SRV < DNS::Zone::RR::Record
 
   REGEX_SRV_RDATA = %r{

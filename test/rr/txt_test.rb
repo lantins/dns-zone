@@ -18,7 +18,7 @@ class RR_TXT_Test < DNS::Zone::TestCase
     assert_equal 'labelname 2w IN TXT "test text"', rr.dump
   end
 
-  def test_load
+  def test_load_rr__txt
     rr = DNS::Zone::RR::TXT.new.load('txtrecord IN TXT "test text"')
     assert_equal 'txtrecord', rr.label
     assert_equal 'IN', rr.klass

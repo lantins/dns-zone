@@ -1,6 +1,6 @@
 # `SRV` resource record.
 #
-# RFC xxxx
+# RFC 1035
 class DNS::Zone::RR::SOA < DNS::Zone::RR::Record
 
   REGEX_SOA_RDATA = %r{

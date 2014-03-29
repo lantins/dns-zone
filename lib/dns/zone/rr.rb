@@ -7,7 +7,7 @@ module DNS
 
       REGEX_TTL = /\d+[wdmhs]?/i
       REGEX_KLASS = /(?<klass>IN)?/i
-      REGEX_TYPE = /(?<type>A|AAAA|CNAME|MX|NS|SOA|SRV|TXT|PTR)\s{1}/i
+      REGEX_TYPE = /(?<type>A|AAAA|CNAME|MX|NS|SOA|SPF|SRV|TXT|PTR)\s{1}/i
       REGEX_RR = /^(?<label>\S+|\s{1})\s*(?<ttl>#{REGEX_TTL})?\s*#{REGEX_KLASS}\s*#{REGEX_TYPE}\s*(?<rdata>[\s\S]*)$/i
       REGEX_DOMAINNAME = /\S+\./i
 
@@ -32,6 +32,7 @@ module DNS
         when 'NS' then NS.new.load(string, options)
         when 'PTR' then PTR.new.load(string, options)
         when 'SOA' then SOA.new.load(string, options)
+        when 'SPF' then SPF.new.load(string, options)
         when 'SRV' then SRV.new.load(string, options)
         when 'TXT' then TXT.new.load(string, options)
         else
@@ -48,6 +49,7 @@ module DNS
       autoload :NS,     'dns/zone/rr/ns'
       autoload :PTR,    'dns/zone/rr/ptr'
       autoload :SOA,    'dns/zone/rr/soa'
+      autoload :SPF,    'dns/zone/rr/spf'
       autoload :SRV,    'dns/zone/rr/srv'
       autoload :TXT,    'dns/zone/rr/txt'
     end

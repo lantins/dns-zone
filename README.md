@@ -38,7 +38,6 @@ Require the gem in your code:
     zone.origin = 'example.com.'
     # FIXME: not sure what RFC (if any) defines the time formatting
     zone.ttl = '1d'
-    # FIXME: keep DNS style representation? for <domain-name>s and email addresses (with or without the terminating dot?)
     zone.soa.nameserver = 'ns0.lividpenguin.com.'
     zone.soa.email = 'hostmaster.lividpenguin.com.'
 
@@ -74,7 +73,7 @@ Require the gem in your code:
     [x] Add support for RR Type: CNAME
     [x] Add support for RR Type: TXT
     [x] Add support for RR Type: SRV
-    [ ] Add support for RR Type: PTR
+    [x] Add support for RR Type: PTR
     [ ] Add support for RR Type: SPF
     [ ] Add support for RR Type: LOC
     [ ] Add support for RR Type: HINFO
@@ -87,7 +86,7 @@ Require the gem in your code:
         [ ] CNAMEs can't use a label of `@`.
         [ ] PTR zones have some extra conditions:
             [ ] labels cant be repeted
-            [ ] names should end in a dot
+            [ ] names should end in a dot, otherwise they are invalid after expansion
             [ ] IPv4 and IPv6 cant be mixed
 
     [ ] Ability to 'include' defaults/records into a zone.
