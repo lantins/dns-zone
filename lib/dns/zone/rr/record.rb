@@ -68,7 +68,7 @@ class DNS::Zone::RR::Record
     captures = string.match(DNS::Zone::RR::REGEX_RR)
     return nil unless captures
 
-    if captures[:label] == ' '
+    if [' ', nil].include?(captures[:label])
       @label = options[:last_label]
     else
       @label = captures[:label]

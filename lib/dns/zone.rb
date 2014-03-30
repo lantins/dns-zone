@@ -39,6 +39,7 @@ module DNS
 
       instance = self.new
 
+      options = {}
       entries.each do |entry|
         if entry =~ /\$(ORIGIN|TTL)\s+(.+)/
           instance.ttl    = $2 if $1 == 'TTL'
@@ -47,8 +48,10 @@ module DNS
         end
 
         if entry =~ DNS::Zone::RR::REGEX_RR
-          rec = DNS::Zone::RR.load(entry)
-          instance.records << rec if rec
+          rec = DNS::Zone::RR.load(entry, options)
+          next unless rec
+          instance.records << rec
+          options[:last_label] = rec.label
         end
 
       end

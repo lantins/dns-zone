@@ -76,7 +76,7 @@ Require the gem in your code:
     [x] Add support for RR Type: PTR
     [x] Add support for RR Type: SPF
     [x] Add support for RR Type: HINFO
-    [ ] Support loading zone where some records have an empty label
+    [x] Support loading zone where some records have an empty label
 
 ## Would be nice
 

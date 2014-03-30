@@ -23,8 +23,11 @@ $TTL 3d
 @           IN  MX 10 mx0.lividpenguin.com.
 @           IN  MX 20 mx1.lividpenguin.com.
 
-@           IN  A     77.75.105.197
-@           IN  AAAA  2a01:348::6:4d4b:69c5:0:1
+@           IN  A     78.47.253.85
+ns0         IN  A     78.47.253.85
+ns0         IN  HINFO "Intel" "Ubuntu"
+
+ns0         IN  AAAA  2a01:4f8:d12:5ca::2
 
 foo         IN  TXT   "part1""part2"
 bar         IN  TXT   ("part1 "
@@ -34,33 +37,45 @@ bar         IN  TXT   ("part1 "
 longttl  5d IN A      10.1.2.3
 
 cake        IN  CNAME the.cake.is.a.lie.com.
-
 xmpp        IN  SRV 5 0 5269 xmpp-server.google.com.
+@           IN  SPF "v=spf1 +mx -all"
 
 ; a record to be expanded
-
 @           IN  NS    ns3
 
+; a record that uses tab spaces
+tabed				IN	A			10.1.2.3
+
 EOL
 
-  # more basic zone file example
+  # basic zone file example
   ZONE_FILE_BASIC_EXAMPLE =<<-EOL
 @ IN SOA ns0.lividpenguin.com. luke.lividpenguin.com. ( 2013101406 12h 15m 3w 3h )
-+@ IN NS ns0.lividpenguin.com.
-+@ IN A 77.75.105.197
+@ IN NS ns0.lividpenguin.com.
+@ IN A 78.47.253.85
 EOL
+
   def test_create_new_instance
     assert DNS::Zone.new
   end
 
-  def test_zone_file_to_ruby
+  def test_load_zone_basic
+    # load zone file.
+    zone = DNS::Zone.load(ZONE_FILE_BASIC_EXAMPLE)
+    # dump zone file.
+    dump = zone.dump
+    # check input matches output.
+    assert_equal ZONE_FILE_BASIC_EXAMPLE, dump, 'loaded zone file should match dumped zone file'
+  end
+
+  def test_load_zone
     # load example dns master zone file.
     zone = DNS::Zone.load(ZONE_FILE_EXAMPLE)
 
     # test attributes are correct.
     assert_equal '3d', zone.ttl, 'check ttl matches example input'
     assert_equal 'lividpenguin.com.', zone.origin, 'check origin matches example input'
-    assert_equal 14, zone.records.length, 'we should have multiple records (including SOA)'
+    assert_equal 18, zone.records.length, 'we should have multiple records (including SOA)'
 
     #p ''
     #zone.records.each do |rec|
@@ -68,13 +83,23 @@ EOL
     #end
   end
 
-  def test_ruby_to_zone_file
+  def test_load_zone_with_empty_labels
+    # basic zone file that uses empty labels (ie. use previous)
+    zone_as_string =<<-EOL
+@    IN A     78.47.253.85
+     IN AAAA  2a01:4f8:d12:5ca::2
+www  IN A     78.47.253.85
+     IN AAAA  2a01:4f8:d12:5ca::2
+EOL
+
     # load zone file.
-    zone = DNS::Zone.load(ZONE_FILE_BASIC_EXAMPLE)
-    # dump zone file.
-    dump = zone.dump
-    # check input matches output.
-    assert_equal ZONE_FILE_BASIC_EXAMPLE, dump, 'loaded zone file should match dumped zone file'
+    zone = DNS::Zone.load(zone_as_string)
+
+    # test labels are 'inherited' from last used.
+    assert_equal '@', zone.records[0].label
+    assert_equal '@', zone.records[1].label, 'label should be inherited from last label used'
+    assert_equal 'www', zone.records[2].label
+    assert_equal 'www', zone.records[3].label, 'label should be inherited from last label used'
   end
 
   def test_extract_entry_from_one_line
