@@ -1,6 +1,6 @@
 require 'dns/zone/test_case'
 
-class RR_SRV_Test < DNS::Zone::TestCase
+class RR_SOA_Test < DNS::Zone::TestCase
 
   EXAMPLE_SOA_IN  = '@ IN SOA ns0.lividpenguin.com. luke.lividpenguin.com. 2014021601 3h 15m 4w 30m'
   EXAMPLE_SOA_OUT = '@ IN SOA ns0.lividpenguin.com. luke.lividpenguin.com. ( 2014021601 3h 15m 4w 30m )'

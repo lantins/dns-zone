@@ -75,8 +75,8 @@ Require the gem in your code:
     [x] Add support for RR Type: SRV
     [x] Add support for RR Type: PTR
     [x] Add support for RR Type: SPF
-    [ ] Add support for RR Type: LOC
-    [ ] Add support for RR Type: HINFO
+    [x] Add support for RR Type: HINFO
+    [ ] Support loading zone where some records have an empty label
 
 ## Would be nice
 
@@ -99,6 +99,7 @@ Require the gem in your code:
         [ ] time format used in output (should parse both formats, seconds or bind time format (e.g. 1d))
             [ ] add comments to explain TTL's that are in seconds
     [ ] Ability to add comment to RR (n.b. currently we strip comments when parsing)
+    [ ] Add support for RR Type: LOC (RFC 1876)
     [ ] Add support for RR Type: DNAME
     [ ] Add support for RR Type: DNSKEY
     [ ] Add support for RR Type: DS

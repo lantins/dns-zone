@@ -7,9 +7,10 @@ module DNS
 
       REGEX_TTL = /\d+[wdmhs]?/i
       REGEX_KLASS = /(?<klass>IN)?/i
-      REGEX_TYPE = /(?<type>A|AAAA|CNAME|MX|NS|SOA|SPF|SRV|TXT|PTR)\s{1}/i
+      REGEX_TYPE = /(?<type>A|AAAA|CNAME|HINFO|MX|NS|SOA|SPF|SRV|TXT|PTR)\s{1}/i
       REGEX_RR = /^(?<label>\S+|\s{1})\s*(?<ttl>#{REGEX_TTL})?\s*#{REGEX_KLASS}\s*#{REGEX_TYPE}\s*(?<rdata>[\s\S]*)$/i
       REGEX_DOMAINNAME = /\S+\./i
+      REGEX_STRING = /((?:[^"\\]+|\\.)*)/
 
       # Load RR string data and return an instance representing the RR.
       #
@@ -28,6 +29,7 @@ module DNS
         when 'A' then A.new.load(string, options)
         when 'AAAA' then AAAA.new.load(string, options)
         when 'CNAME' then CNAME.new.load(string, options)
+        when 'HINFO' then HINFO.new.load(string, options)
         when 'MX' then MX.new.load(string, options)
         when 'NS' then NS.new.load(string, options)
         when 'PTR' then PTR.new.load(string, options)
@@ -45,6 +47,7 @@ module DNS
       autoload :A,      'dns/zone/rr/a'
       autoload :AAAA,   'dns/zone/rr/aaaa'
       autoload :CNAME,  'dns/zone/rr/cname'
+      autoload :HINFO,  'dns/zone/rr/hinfo'
       autoload :MX,     'dns/zone/rr/mx'
       autoload :NS,     'dns/zone/rr/ns'
       autoload :PTR,    'dns/zone/rr/ptr'

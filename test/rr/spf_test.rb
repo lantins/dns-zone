@@ -1,6 +1,6 @@
 require 'dns/zone/test_case'
 
-class RR_TXT_Test < DNS::Zone::TestCase
+class RR_SPF_Test < DNS::Zone::TestCase
 
   def test_build_rr__spf
     rr = DNS::Zone::RR::SPF.new
