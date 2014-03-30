@@ -53,7 +53,7 @@ class DNS::Zone::RR::Record
   # @option options [String] :last_label The last label used by the previous RR
   # @return [Object]
   def load(string, options = {})
-    raise 'must be implemented by subclass'
+    raise NotImplementedError, "#load method must be implemented by subclass (#{self.class})"
   end
 
   # Load 'general' RR data/params and return the remaining RDATA for further parsing.

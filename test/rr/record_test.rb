@@ -27,4 +27,11 @@ class RR_Record_Test < DNS::Zone::TestCase
     assert_equal '@ 2d IN <type>', rr.dump
   end
 
+  # the load method should be overloaded by a subclass, calling direct should raise
+  def test_record_load_default_method_raises_exception
+    assert_raises(NotImplementedError) {
+      DNS::Zone::RR::Record.new.load('')
+    }
+  end
+
 end
