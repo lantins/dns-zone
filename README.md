@@ -74,7 +74,7 @@ Require the gem in your code:
     [x] Add support for RR Type: TXT
     [x] Add support for RR Type: SRV
     [x] Add support for RR Type: PTR
-    [ ] Add support for RR Type: SPF
+    [x] Add support for RR Type: SPF
     [ ] Add support for RR Type: LOC
     [ ] Add support for RR Type: HINFO
 
