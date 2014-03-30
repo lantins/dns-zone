@@ -102,6 +102,20 @@ EOL
     assert_equal 'www', zone.records[3].label, 'label should be inherited from last label used'
   end
 
+  def test_load_zone_that_uses_tabs_rather_then_spaces
+    zone_as_string =<<-EOL
+*		IN	A			78.47.253.85
+EOL
+
+    # load zone file.
+    zone = DNS::Zone.load(zone_as_string)
+
+    record = zone.records[0]
+    assert_equal '*', record.label
+    assert_equal 'A', record.type
+    assert_equal '78.47.253.85', record.address
+  end
+
   def test_extract_entry_from_one_line
     entries = DNS::Zone.extract_entries(%Q{maiow IN TXT "purr"})
     assert_equal 1, entries.length, 'we should have 1 entry'
