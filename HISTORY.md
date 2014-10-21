@@ -1,5 +1,9 @@
 ## HEAD
 
+## 0.1.2 (2014-10-21)
+
+* Fix TXT record parsing bug, when quote enclosed RDATA contained semicolons.
+
 ## 0.1.1 (2014-03-30)
 
 * Remove `required_ruby_version` from gemspec.
