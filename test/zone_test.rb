@@ -33,7 +33,7 @@ foo         IN  TXT   "part1""part2"
 bar         IN  TXT   ("part1 "
                        "part2 "
                        "part3")
-_domainkey  IN TXT    "t=y; o=~;"
+_domainkey  IN  TXT    "t=y; o=~;"
 
 longttl  5d IN A      10.1.2.3
 
