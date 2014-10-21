@@ -27,6 +27,14 @@ class RRTest < DNS::Zone::TestCase
     assert_equal 'TXT', rr.type
     assert_equal 'test text', rr.text
   end
+  
+  def test_load_txt_semicolon_rr
+    rr = DNS::Zone::RR.load('_domainkey IN TXT "t=y; o=~;"')
+    assert_instance_of DNS::Zone::RR::TXT, rr, 'should be instance of TXT RR'
+    assert_equal '_domainkey', rr.label
+    assert_equal 'TXT', rr.type
+    assert_equal 't=y; o=~;', rr.text
+  end
 
   def test_load_a_rr_with_options_hash
     rr = DNS::Zone::RR.load(' IN A 10.2.3.1', { last_label: 'www' })
