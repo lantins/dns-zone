@@ -70,7 +70,9 @@ module DNS
 
       string.lines.each do |line|
         # strip comments unless escaped
-        line = line.gsub(/(?<!\\);.*/o, '').chomp
+        # strip comments, unless its escaped.
+        # skip semicolons within "quote segments" (TXT records)
+        line = line.gsub(/((?<!\\);)(?=(?:[^"]|"[^"]*")*$).*/o, "").chomp
 
         next if line.gsub(/\s+/, '').empty?
 
