@@ -1,6 +1,6 @@
 ## HEAD
 
-## 0.1.2 (2014-10-21)
+## 0.1.3 (2014-10-21)
 
 * Fix TXT record parsing bug, when quote enclosed RDATA contained semicolons.
 
