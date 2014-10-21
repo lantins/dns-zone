@@ -33,6 +33,7 @@ foo         IN  TXT   "part1""part2"
 bar         IN  TXT   ("part1 "
                        "part2 "
                        "part3")
+_domainkey  IN  TXT    "t=y; o=~;"
 
 longttl  5d IN A      10.1.2.3
 
@@ -75,7 +76,7 @@ EOL
     # test attributes are correct.
     assert_equal '3d', zone.ttl, 'check ttl matches example input'
     assert_equal 'lividpenguin.com.', zone.origin, 'check origin matches example input'
-    assert_equal 18, zone.records.length, 'we should have multiple records (including SOA)'
+    assert_equal 19, zone.records.length, 'we should have multiple records (including SOA)'
 
     #p ''
     #zone.records.each do |rec|
@@ -120,6 +121,12 @@ EOL
     entries = DNS::Zone.extract_entries(%Q{maiow IN TXT "purr"})
     assert_equal 1, entries.length, 'we should have 1 entry'
     assert_equal 'maiow IN TXT "purr"', entries[0], 'entry should match expected'
+  end
+
+  def test_extract_entry_including_semicolon_within_quotes
+    entries = DNS::Zone.extract_entries(%Q{_domainkey IN TXT "t=y; o=~;"})
+    assert_equal 1, entries.length, 'we should have 1 entry'
+    assert_equal '_domainkey IN TXT "t=y; o=~;"', entries[0], 'entry should match expected'
   end
 
   def test_extract_entry_should_ignore_comments
