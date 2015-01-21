@@ -38,7 +38,7 @@ Require the gem in your code:
     zone.soa.nameserver = 'ns0.lividpenguin.com.'
     zone.soa.email = 'hostmaster.lividpenguin.com.'
     
-    # add A RR
+    # add an A RR
     rec = DNS::Zone::RR::A.new
     rec.address = '127.0.0.1'
     zone.records << rec

@@ -13,23 +13,40 @@ module DNS
     attr_accessor :ttl
     # The primary $ORIGIN (directive) of the zone.
     attr_accessor :origin
-    # Array of all the zones RRs (excluding the SOA).
+    # Array of all the zones RRs (including the SOA).
     attr_accessor :records
-    # SOA RR, you can only have one per zone.
-    attr_accessor :soa
 
     # Create an empty instance of a DNS zone that you can drive programmatically.
     #
     # @api public
     def initialize
       @records = []
-      @soa = DNS::Zone::RR::SOA.new
+      soa = DNS::Zone::RR::SOA.new
       # set a couple of defaults on the SOA
-      @soa.serial = Time.now.utc.strftime("%Y%m%d01")    
-      @soa.refresh_ttl = '3h'
-      @soa.retry_ttl = '15m'
-      @soa.expiry_ttl = '4w'
-      @soa.minimum_ttl = '30m'
+      soa.serial = Time.now.utc.strftime("%Y%m%d01")    
+      soa.refresh_ttl = '3h'
+      soa.retry_ttl = '15m'
+      soa.expiry_ttl = '4w'
+      soa.minimum_ttl = '30m'
+    end
+
+    # Helper method to access the zones SOA RR.
+    #
+    # @api public
+    def soa
+      # return the first SOA we find in the records array.
+      rr = @records.find { |rr| rr.type == "SOA" }
+      return rr if rr
+      # otherwise create a new SOA
+      rr = DNS::Zone::RR::SOA.new
+      rr.serial = Time.now.utc.strftime("%Y%m%d01")    
+      rr.refresh_ttl = '3h'
+      rr.retry_ttl = '15m'
+      rr.expiry_ttl = '4w'
+      rr.minimum_ttl = '30m'
+      # store and return new SOA
+      @records << rr
+      return rr
     end
 
     # Generates output of the zone and its records.
@@ -37,9 +54,8 @@ module DNS
     # @api public
     def dump
       content = []
-      all_rrs = [@soa] + @records
 
-      all_rrs.each do |rr|
+      @records.each do |rr|
         content << rr.dump
       end
 
@@ -66,11 +82,7 @@ module DNS
         if entry =~ DNS::Zone::RR::REGEX_RR
           rec = DNS::Zone::RR.load(entry, options)
           next unless rec
-          if rec.type == "SOA"
-            instance.soa = rec
-          else
-            instance.records << rec
-          end
+          instance.records << rec
           options[:last_label] = rec.label
         end
 

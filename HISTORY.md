@@ -1,6 +1,6 @@
 ## HEAD
 
-* Treat SOA a little different to other RRs (not part of the records array).
+* Add helper method to quickly access (or create) SOA.
 
 ## 0.1.3 (2014-10-21)
 

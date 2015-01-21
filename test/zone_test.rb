@@ -72,7 +72,7 @@ EOL
     rec.address = '127.0.0.1'
     zone.records << rec
 
-    assert_equal 1, zone.records.length, "were expecting 1 record"
+    assert_equal 2, zone.records.length, "were expecting 2 records, including the SOA"
   end
 
   def test_load_zone_basic
@@ -91,7 +91,7 @@ EOL
     # test attributes are correct.
     assert_equal '3d', zone.ttl, 'check ttl matches example input'
     assert_equal 'lividpenguin.com.', zone.origin, 'check origin matches example input'
-    assert_equal 18, zone.records.length, 'we should have multiple records (excluding SOA)'
+    assert_equal 19, zone.records.length, 'we should have multiple records (including SOA)'
 
     #p ''
     #zone.records.each do |rec|
