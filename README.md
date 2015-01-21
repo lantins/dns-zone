@@ -3,8 +3,9 @@ dns-zone
 
 [![Build Status](https://secure.travis-ci.org/lantins/dns-zone.png?branch=master)](http://travis-ci.org/lantins/dns-zone)
 [![Gem Version](https://badge.fury.io/rb/dns-zone.png)](http://badge.fury.io/rb/dns-zone)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/lantins/dns-zone/blob/master/LICENSE)
 [![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://rubydoc.info/github/lantins/dns-zone/master/frames)
-[![Inline docs](http://inch-ci.org/github/lantins/dns-zone.svg)](http://inch-ci.org/github/lantins/dns-zone)
+[![Doc Coverage](http://inch-ci.org/github/lantins/dns-zone.svg)](http://inch-ci.org/github/lantins/dns-zone)
 
 A Ruby library for building and parsing DNS zone files.
 
