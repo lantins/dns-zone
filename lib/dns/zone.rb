@@ -9,30 +9,46 @@ module DNS
   # This is also the primary namespace for the `dns-zone` gem.
   class Zone
 
-    attr_accessor :ttl, :origin, :records
+    # The default $TTL (directive) of the zone.
+    attr_accessor :ttl
+    # The primary $ORIGIN (directive) of the zone.
+    attr_accessor :origin
+    # Array of all the zones RRs (excluding the SOA).
+    attr_accessor :records
+    # SOA RR, you can only have one per zone.
+    attr_accessor :soa
 
+    # Create an empty instance of a DNS zone that you can drive programmatically.
+    #
+    # @api public
     def initialize
       @records = []
+      @soa = DNS::Zone::RR::SOA.new
+      # set a couple of defaults on the SOA
+      @soa.serial = Time.now.utc.strftime("%Y%m%d01")    
+      @soa.refresh_ttl = '3h'
+      @soa.retry_ttl = '15m'
+      @soa.expiry_ttl = '4w'
+      @soa.minimum_ttl = '30m'
     end
 
+    # Generates output of the zone and its records.
+    #
+    # @api public
     def dump
       content = []
-      @records.each do |rr|
+      all_rrs = [@soa] + @records
+
+      all_rrs.each do |rr|
         content << rr.dump
       end
 
       content.join("\n") << "\n"
     end
 
-    # FROM RFC:
-    #     The format of these files is a sequence of entries.  Entries are
-    #     predominantly line-oriented, though parentheses can be used to continue
-    #     a list of items across a line boundary, and text literals can contain
-    #     CRLF within the text.  Any combination of tabs and spaces act as a
-    #     delimiter between the separate items that make up an entry.  The end of
-    #     any line in the master file can end with a comment.  The comment starts
-    #     with a ";" (semicolon). 
-
+    # Load the provided zone file data into a new DNS::Zone object.
+    #
+    # @api public
     def self.load(string)
       # get entries
       entries = self.extract_entries(string)
@@ -50,7 +66,11 @@ module DNS
         if entry =~ DNS::Zone::RR::REGEX_RR
           rec = DNS::Zone::RR.load(entry, options)
           next unless rec
-          instance.records << rec
+          if rec.type == "SOA"
+            instance.soa = rec
+          else
+            instance.records << rec
+          end
           options[:last_label] = rec.label
         end
 
@@ -61,7 +81,19 @@ module DNS
       return instance
     end
 
+    # Extract entries from a zone file that will be later parsed as RRs.
+    #
+    # @api private
     def self.extract_entries(string)
+      # FROM RFC:
+      #     The format of these files is a sequence of entries.  Entries are
+      #     predominantly line-oriented, though parentheses can be used to continue
+      #     a list of items across a line boundary, and text literals can contain
+      #     CRLF within the text.  Any combination of tabs and spaces act as a
+      #     delimiter between the separate items that make up an entry.  The end of
+      #     any line in the master file can end with a comment.  The comment starts
+      #     with a ";" (semicolon). 
+
       entries = []
       mode = :line
       entry = ''
@@ -114,6 +146,8 @@ module DNS
 
       return entries
     end
+
+    # 
 
   end
 end

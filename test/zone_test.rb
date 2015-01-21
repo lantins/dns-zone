@@ -60,6 +60,21 @@ EOL
     assert DNS::Zone.new
   end
 
+  def test_programmatic_readme_example
+    zone = DNS::Zone.new
+    zone.origin = 'example.com.'
+    zone.ttl = '1d'
+    # quick access to SOA RR
+    zone.soa.nameserver = 'ns0.lividpenguin.com.'
+    zone.soa.email = 'hostmaster.lividpenguin.com.'
+    # create and add new record
+    rec = DNS::Zone::RR::A.new
+    rec.address = '127.0.0.1'
+    zone.records << rec
+
+    assert_equal 1, zone.records.length, "were expecting 1 record"
+  end
+
   def test_load_zone_basic
     # load zone file.
     zone = DNS::Zone.load(ZONE_FILE_BASIC_EXAMPLE)
@@ -76,7 +91,7 @@ EOL
     # test attributes are correct.
     assert_equal '3d', zone.ttl, 'check ttl matches example input'
     assert_equal 'lividpenguin.com.', zone.origin, 'check origin matches example input'
-    assert_equal 19, zone.records.length, 'we should have multiple records (including SOA)'
+    assert_equal 18, zone.records.length, 'we should have multiple records (excluding SOA)'
 
     #p ''
     #zone.records.each do |rec|

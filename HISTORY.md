@@ -1,5 +1,7 @@
 ## HEAD
 
+* Treat SOA a little different to other RRs (not part of the records array).
+
 ## 0.1.3 (2014-10-21)
 
 * Fix TXT record parsing bug, when quote enclosed RDATA contained semicolons.

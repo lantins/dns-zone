@@ -33,10 +33,17 @@ Require the gem in your code:
     zone = DNS::Zone.new
     zone.origin = 'example.com.'
     zone.ttl = '1d'
+    
+    # quick access to SOA RR
     zone.soa.nameserver = 'ns0.lividpenguin.com.'
     zone.soa.email = 'hostmaster.lividpenguin.com.'
-
-    # output as dns zone file
+    
+    # add A RR
+    rec = DNS::Zone::RR::A.new
+    rec.address = '127.0.0.1'
+    zone.records << rec
+    
+    # output using dns zone file format
     zone.dump
 
 # Development

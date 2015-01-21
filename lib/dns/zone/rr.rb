@@ -39,7 +39,7 @@ module DNS
         when 'SRV' then SRV.new.load(string, options)
         when 'TXT' then TXT.new.load(string, options)
         else
-          raise 'Unknown RR Type'          
+          raise 'Unknown or unsupported RR Type'          
         end
       end
 
