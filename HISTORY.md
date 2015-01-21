@@ -1,6 +1,7 @@
 ## HEAD
 
 * Add helper method to quickly access (or create) SOA.
+* Add `dump_pretty` method to `DNS::Zone`
 
 ## 0.1.3 (2014-10-21)
 

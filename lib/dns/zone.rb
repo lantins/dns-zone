@@ -55,8 +55,24 @@ module DNS
     def dump
       content = []
 
-      @records.each do |rr|
+      sorted_records.each do |rr|
         content << rr.dump
+      end
+
+      content.join("\n") << "\n"
+    end
+
+    # Generates pretty output of the zone and its records.
+    #
+    # @api public
+    def dump_pretty
+      content = []
+
+      last_type = "SOA"
+      sorted_records.each do |rr|
+        content << '' if last_type != rr.type
+        content << rr.dump
+        last_type = rr.type
       end
 
       content.join("\n") << "\n"
@@ -159,7 +175,25 @@ module DNS
       return entries
     end
 
-    # 
+    private
+
+    # Records sorted with more important types being at the top.
+    #
+    # @api private
+    def sorted_records
+      # pull out RRs we want to stick near the top
+      top_rrs = {}
+      top = %w{SOA NS MX SPF TXT}
+      top.each { |t| top_rrs[t] = @records.select { |rr| rr.type == t } }
+
+      remaining = @records.reject { |rr| top.include?(rr.type) }
+
+      # sort remaining RRs by type, alphabeticly
+      remaining.sort! { |a,b| a.type <=> b.type }
+
+      top_rrs.values.flatten + remaining
+    end
+
 
   end
 end
