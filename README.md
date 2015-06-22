@@ -80,6 +80,23 @@ Require the gem in your code:
     [x] Add support for RR Type: HINFO
     [x] Support loading zone where some records have an empty label
 
+    [ ] Add support for RR Type: NAPTR (RFC 3403)
+    [ ] Add support for RR Type: SSHFP (RFC 4255)
+
+    [ ] Add support for DNSSEC (RFC 4034) RR Types:
+        [ ] DNSKEY
+        [ ] RRSIG
+        [ ] NSEC
+        [ ] DS
+    [ ] Add support for DNSSEC (RFC 5155) RR Types:
+        [ ] NSEC3
+        [ ] NSEC3PARAM
+
+    [ ] Add support for DNSSEC (RFC 4431 & RFC 7344) RR Types:
+        [ ] CDNSKEY (identical to DNSKEY)
+        [ ] CDS (identical to DS)
+        [ ] DLV (identical to DS)
+
 ## Would be nice
 
     [ ] Handle parsing a zone file that uses more then one $ORIGIN directive.
@@ -102,13 +119,8 @@ Require the gem in your code:
             [ ] add comments to explain TTL's that are in seconds
     [ ] Ability to add comment to RR (n.b. currently we strip comments when parsing)
     [ ] Add support for RR Type: LOC (RFC 1876)
-    [ ] Add support for RR Type: DNAME
-    [ ] Add support for RR Type: DNSKEY
-    [ ] Add support for RR Type: DS
+    [ ] Add support for RR Type: DNAME (RFC 2672)
     [ ] Add support for RR Type: KEY
-    [ ] Add support for RR Type: NSEC
-    [ ] Add support for RR Type: RRSIG
-    [ ] Add support for RR Type: NAPTR
     [ ] Add support for RR Type: RP
     [ ] Add support for RR Type: RT
 
