@@ -1,5 +1,7 @@
 ## HEAD
 
+* Add support for DNSSEC focused RR Types:
+    - NAPTR (RFC 3403)
 * Add helper method to quickly access (or create) SOA.
 * Add `dump_pretty` method to `DNS::Zone`
 

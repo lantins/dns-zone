@@ -7,7 +7,7 @@ module DNS
 
       REGEX_TTL = /\d+[wdmhs]?/i
       REGEX_KLASS = /(?<klass>IN)?/i
-      REGEX_TYPE = /(?<type>A|AAAA|CNAME|HINFO|MX|NS|SOA|SPF|SRV|TXT|PTR)\s{1}/i
+      REGEX_TYPE = /(?<type>A|AAAA|CNAME|HINFO|MX|NAPTR|NS|SOA|SPF|SRV|TXT|PTR)\s{1}/i
       REGEX_RR = /^(?<label>\S+|\s{1})\s*(?<ttl>#{REGEX_TTL})?\s*#{REGEX_KLASS}\s*#{REGEX_TYPE}\s*(?<rdata>[\s\S]*)$/i
       REGEX_DOMAINNAME = /\S+\./i
       REGEX_STRING = /((?:[^"\\]+|\\.)*)/
@@ -35,6 +35,7 @@ module DNS
         when 'CNAME' then CNAME.new.load(string, options)
         when 'HINFO' then HINFO.new.load(string, options)
         when 'MX' then MX.new.load(string, options)
+        when 'NAPTR' then NAPTR.new.load(string, options)
         when 'NS' then NS.new.load(string, options)
         when 'PTR' then PTR.new.load(string, options)
         when 'SOA' then SOA.new.load(string, options)
@@ -53,6 +54,7 @@ module DNS
       autoload :CNAME,  'dns/zone/rr/cname'
       autoload :HINFO,  'dns/zone/rr/hinfo'
       autoload :MX,     'dns/zone/rr/mx'
+      autoload :NAPTR,  'dns/zone/rr/naptr'
       autoload :NS,     'dns/zone/rr/ns'
       autoload :PTR,    'dns/zone/rr/ptr'
       autoload :SOA,    'dns/zone/rr/soa'

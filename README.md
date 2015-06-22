@@ -80,7 +80,7 @@ Require the gem in your code:
     [x] Add support for RR Type: HINFO
     [x] Support loading zone where some records have an empty label
 
-    [ ] Add support for RR Type: NAPTR (RFC 3403)
+    [x] Add support for RR Type: NAPTR (RFC 3403)
     [ ] Add support for RR Type: SSHFP (RFC 4255)
 
     [ ] Add support for DNSSEC (RFC 4034) RR Types:
