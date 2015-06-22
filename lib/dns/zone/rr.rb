@@ -11,6 +11,9 @@ module DNS
       REGEX_RR = /^(?<label>\S+|\s{1})\s*(?<ttl>#{REGEX_TTL})?\s*#{REGEX_KLASS}\s*#{REGEX_TYPE}\s*(?<rdata>[\s\S]*)$/i
       REGEX_DOMAINNAME = /\S+\./i
       REGEX_STRING = /((?:[^"\\]+|\\.)*)/
+      REGEX_CHARACTER_STRING = %r{
+        "#{DNS::Zone::RR::REGEX_STRING}"|#{DNS::Zone::RR::REGEX_STRING}
+      }mx
 
       # Load RR string data and return an instance representing the RR.
       #

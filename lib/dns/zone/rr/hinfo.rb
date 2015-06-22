@@ -3,13 +3,9 @@
 # RFC 1035
 class DNS::Zone::RR::HINFO < DNS::Zone::RR::Record
 
-  REGEX_QUOTES_OPTIONAL = %r{
-    "#{DNS::Zone::RR::REGEX_STRING}"|#{DNS::Zone::RR::REGEX_STRING}
-  }mx
-
   REGEX_HINFO_RDATA = %r{
-    (?<cpu>(?:#{REGEX_QUOTES_OPTIONAL})){1}\s
-    (?<os>(?:#{REGEX_QUOTES_OPTIONAL})){1}
+    (?<cpu>(?:#{DNS::Zone::RR::REGEX_CHARACTER_STRING})){1}\s
+    (?<os>(?:#{DNS::Zone::RR::REGEX_CHARACTER_STRING})){1}
   }mx
   attr_accessor :cpu
   attr_accessor :os
@@ -27,8 +23,8 @@ class DNS::Zone::RR::HINFO < DNS::Zone::RR::Record
     captures = rdata.match(REGEX_HINFO_RDATA)
     return nil unless captures
 
-    @cpu = captures[:cpu].scan(/#{REGEX_QUOTES_OPTIONAL}/).join
-    @os = captures[:os].scan(/"#{DNS::Zone::RR::REGEX_STRING}"|#{DNS::Zone::RR::REGEX_STRING}/).join
+    @cpu = captures[:cpu].scan(/#{DNS::Zone::RR::REGEX_CHARACTER_STRING}/).join
+    @os = captures[:os].scan(/#{DNS::Zone::RR::REGEX_CHARACTER_STRING}/).join
     self
   end
 
