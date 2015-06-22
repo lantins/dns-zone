@@ -55,7 +55,7 @@ module DNS
     def dump
       content = []
 
-      sorted_records.each do |rr|
+      @records.each do |rr|
         content << rr.dump
       end
 
