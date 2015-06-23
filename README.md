@@ -66,6 +66,8 @@ Require the gem in your code:
 
 Special thanks to Peter J. Philipp [centroid.eu](http://centroid.eu) for sponsoring the 0.2.0 release of dns-zone.
 
+---
+
 # TODO
 
 ## Must have
@@ -128,7 +130,7 @@ Special thanks to Peter J. Philipp [centroid.eu](http://centroid.eu) for sponsor
     [ ] Add support for RR Type: RP
     [ ] Add support for RR Type: RT
 
-# Notes
+# Misc. Development Notes
 
 - RR Format: `[<TTL>] [<class>] <type> <RDATA>`
 - A DNS zone is built from RR's and a couple of other special directives.
