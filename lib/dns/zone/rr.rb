@@ -7,7 +7,7 @@ module DNS
 
       REGEX_TTL = /\d+[wdmhs]?/i
       REGEX_KLASS = /(?<klass>IN)?/i
-      REGEX_TYPE = /(?<type>A|AAAA|CNAME|HINFO|MX|NAPTR|NS|SOA|SPF|SRV|TXT|PTR)\s{1}/i
+      REGEX_TYPE = /(?<type>A|AAAA|CNAME|HINFO|MX|NAPTR|NS|SOA|SPF|SRV|SSHFP|TXT|PTR)\s{1}/i
       REGEX_RR = /^(?<label>\S+|\s{1})\s*(?<ttl>#{REGEX_TTL})?\s*#{REGEX_KLASS}\s*#{REGEX_TYPE}\s*(?<rdata>[\s\S]*)$/i
       REGEX_DOMAINNAME = /\S+\./i
       REGEX_STRING = /((?:[^"\\]+|\\.)*)/
@@ -41,6 +41,7 @@ module DNS
         when 'SOA' then SOA.new.load(string, options)
         when 'SPF' then SPF.new.load(string, options)
         when 'SRV' then SRV.new.load(string, options)
+        when 'SSHFP' then SSHFP.new.load(string, options)
         when 'TXT' then TXT.new.load(string, options)
         else
           raise 'Unknown or unsupported RR Type'          
@@ -60,6 +61,7 @@ module DNS
       autoload :SOA,    'dns/zone/rr/soa'
       autoload :SPF,    'dns/zone/rr/spf'
       autoload :SRV,    'dns/zone/rr/srv'
+      autoload :SSHFP,  'dns/zone/rr/sshfp'
       autoload :TXT,    'dns/zone/rr/txt'
     end
 

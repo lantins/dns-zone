@@ -2,6 +2,7 @@
 
 * Add support for DNSSEC focused RR Types:
     - NAPTR (RFC 3403)
+    - SSHFP (RFC 4255)
 
 # 0.1.4 (no gem release)
 
