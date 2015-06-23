@@ -62,6 +62,10 @@ Require the gem in your code:
     # watch for changes and run development commands (tests, documentation, etc)
     bundle exec guard
 
+# Acknowledgement
+
+Special thanks to Peter J. Philipp [centroid.eu](http://centroid.eu) for sponsoring the 0.2.0 release of dns-zone.
+
 # TODO
 
 ## Must have

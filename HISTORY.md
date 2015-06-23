@@ -1,5 +1,7 @@
 ## HEAD
 
+Development sponsored by Peter J. Philipp [centroid.eu](http://centroid.eu)
+
 * Add support for DNSSEC focused RR Types:
     - NAPTR (RFC 3403)
     - SSHFP (RFC 4255)
