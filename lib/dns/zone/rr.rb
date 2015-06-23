@@ -7,7 +7,7 @@ module DNS
 
       REGEX_TTL = /\d+[wdmhs]?/i
       REGEX_KLASS = /(?<klass>IN)?/i
-      REGEX_TYPE = /(?<type>A|AAAA|CNAME|HINFO|MX|NAPTR|NS|SOA|SPF|SRV|SSHFP|TXT|PTR)\s{1}/i
+      REGEX_TYPE = /(?<type>A|AAAA|CNAME|DNSKEY|HINFO|MX|NAPTR|NS|SOA|SPF|SRV|SSHFP|TXT|PTR)\s{1}/i
       REGEX_RR = /^(?<label>\S+|\s{1})\s*(?<ttl>#{REGEX_TTL})?\s*#{REGEX_KLASS}\s*#{REGEX_TYPE}\s*(?<rdata>[\s\S]*)$/i
       REGEX_DOMAINNAME = /\S+\./i
       REGEX_STRING = /((?:[^"\\]+|\\.)*)/
@@ -33,6 +33,7 @@ module DNS
         when 'A' then A.new.load(string, options)
         when 'AAAA' then AAAA.new.load(string, options)
         when 'CNAME' then CNAME.new.load(string, options)
+        when 'DNSKEY' then DNSKEY.new.load(string, options)
         when 'HINFO' then HINFO.new.load(string, options)
         when 'MX' then MX.new.load(string, options)
         when 'NAPTR' then NAPTR.new.load(string, options)
@@ -53,6 +54,7 @@ module DNS
       autoload :A,      'dns/zone/rr/a'
       autoload :AAAA,   'dns/zone/rr/aaaa'
       autoload :CNAME,  'dns/zone/rr/cname'
+      autoload :DNSKEY, 'dns/zone/rr/dnskey'
       autoload :HINFO,  'dns/zone/rr/hinfo'
       autoload :MX,     'dns/zone/rr/mx'
       autoload :NAPTR,  'dns/zone/rr/naptr'

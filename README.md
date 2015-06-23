@@ -89,8 +89,10 @@ Special thanks to Peter J. Philipp [centroid.eu](http://centroid.eu) for sponsor
     [x] Add support for RR Type: NAPTR (RFC 3403)
     [x] Add support for RR Type: SSHFP (RFC 4255)
 
+    [ ] Add test using real bind zone file, with DNSSEC RR's.
     [ ] Add support for DNSSEC (RFC 4034) RR Types:
-        [ ] DNSKEY
+        [x] DNSKEY
+            [ ] Algorithm may be integer or mnemonic
         [ ] RRSIG
         [ ] NSEC
         [ ] DS
