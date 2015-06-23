@@ -29,9 +29,9 @@ spec = Gem::Specification.new do |s|
   s.add_development_dependency('minitest',       '~> 5.0')
   s.add_development_dependency('simplecov',      '~> 0.7.1')
   s.add_development_dependency('yard',           '~> 0.8')
-  s.add_development_dependency('inch',           '~> 0.3')
+  s.add_development_dependency('inch',           '~> 0.6')
   s.add_development_dependency('guard-minitest', '~> 2.0')
-  s.add_development_dependency('guard-bundler',  '~> 0')
+  s.add_development_dependency('guard-bundler',  '~> 2.0')
 
   # long description.
   s.description       = <<-EOL
