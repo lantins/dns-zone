@@ -3,7 +3,7 @@
 # RFC 4255
 class DNS::Zone::RR::SSHFP < DNS::Zone::RR::Record
 
-  REGEX_NAPTR_RDATA = %r{
+  REGEX_SSHFP_RDATA = %r{
     (?<algorithm_number>\d+)\s*
     (?<fingerprint_type>\d+)\s*
     (?<fingerprint>#{DNS::Zone::RR::REGEX_STRING})\s*
@@ -23,7 +23,7 @@ class DNS::Zone::RR::SSHFP < DNS::Zone::RR::Record
     rdata = load_general_and_get_rdata(string, options)
     return nil unless rdata
 
-    captures = rdata.match(REGEX_NAPTR_RDATA)
+    captures = rdata.match(REGEX_SSHFP_RDATA)
     return nil unless captures
 
     @algorithm_number = captures[:algorithm_number].to_i
