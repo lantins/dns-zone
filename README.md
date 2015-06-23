@@ -6,7 +6,7 @@ dns-zone
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/lantins/dns-zone/blob/master/LICENSE)
 [![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://rubydoc.info/github/lantins/dns-zone/master/frames)
 
-A Ruby library for building and parsing DNS zone files.
+A Ruby library for building, parsing and manipulating DNS zone files.
 
 ## Installation
 
@@ -102,10 +102,10 @@ Special thanks to Peter J. Philipp [centroid.eu](http://centroid.eu) for sponsor
         [ ] NSEC3
         [ ] NSEC3PARAM
 
-    [ ] Add support for DNSSEC (RFC 4431 & RFC 7344) RR Types:
-        [ ] CDNSKEY (identical to DNSKEY)
-        [ ] CDS (identical to DS)
-        [ ] DLV (identical to DS)
+    [x] Add support for DNSSEC (RFC 4431 & RFC 7344) RR Types:
+        [x] CDNSKEY (identical to DNSKEY)
+        [x] CDS (identical to DS)
+        [x] DLV (identical to DS)
 
 ## Would be nice
 
@@ -114,7 +114,7 @@ Special thanks to Peter J. Philipp [centroid.eu](http://centroid.eu) for sponsor
         [ ] Only one SOA per zone.
         [ ] CNAMEs can't use a label of `@`.
         [ ] PTR zones have some extra conditions:
-            [ ] labels cant be repeted
+            [ ] labels cant be repeated
             [ ] names should end in a dot, otherwise they are invalid after expansion
             [ ] IPv4 and IPv6 cant be mixed
 

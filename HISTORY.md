@@ -7,11 +7,14 @@ Development sponsored by Peter J. Philipp [centroid.eu](http://centroid.eu)
     - SSHFP (RFC 4255)
     - DNSKEY (RFC 4034)
     - DS (RFC 4034)
+    - CDNSKEY (RFC 7344)
+    - CDS (RFC 7344)
+    - DLV (RFC 4431)
 
 # 0.1.4 (no gem release)
 
 * Add helper method to quickly access (or create) SOA.
-* Add `dump_pretty` method to `DNS::Zone`
+* Add `dump_pretty` method to `DNS::Zone`.
 
 ## 0.1.3 (2014-10-21)
 
