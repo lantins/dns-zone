@@ -6,6 +6,7 @@ Development sponsored by Peter J. Philipp [centroid.eu](http://centroid.eu)
     - NAPTR (RFC 3403)
     - SSHFP (RFC 4255)
     - DNSKEY (RFC 4034)
+    - DS (RFC 4034)
 
 # 0.1.4 (no gem release)
 

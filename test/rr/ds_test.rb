@@ -22,7 +22,7 @@ class RR_DS_Test < DNS::Zone::TestCase
     assert_equal 60485, rr.key_tag
     assert_equal 5, rr.algorithm
     assert_equal 1, rr.digest_type
-    assert_equal "dskey.example.com. IN DS 60485 5 1 #{TEST_DIGEST}", rr.key
+    assert_equal TEST_DIGEST, rr.digest
   end
 
 end
