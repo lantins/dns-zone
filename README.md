@@ -100,7 +100,7 @@ Special thanks to Peter J. Philipp [centroid.eu](http://centroid.eu) for sponsor
         [x] DS
     [ ] Add support for DNSSEC (RFC 5155) RR Types:
         [x] NSEC3
-        [ ] NSEC3PARAM
+        [x] NSEC3PARAM
         [ ] Correctly handle "Presentation Format" as defined in RFC.
 
     [x] Add support for DNSSEC (RFC 4431 & RFC 7344) RR Types:

@@ -3,15 +3,12 @@
 Development sponsored by Peter J. Philipp [centroid.eu](http://centroid.eu)
 
 * Add support for DNSSEC focused RR Types:
-    - NAPTR (RFC 3403)
-    - SSHFP (RFC 4255)
-    - DNSKEY (RFC 4034)
-    - DS (RFC 4034)
-    - RRSIG (RFC 4034)
-    - NSEC (RFC 4034)
-    - CDNSKEY (RFC 7344)
-    - CDS (RFC 7344)
-    - DLV (RFC 4431)
+    - RFC 3403: NAPTR
+    - RFC 4255: SSHFP
+    - RFC 4034: DNSKEY, DS, RRSIG, NSEC
+    - RFC 7344: CDNSKEY, CDS
+    - RFC 4431: DLV
+    - RFC 5155: NSEC3, NSEC3PARAM
 
 # 0.1.4 (no gem release)
 

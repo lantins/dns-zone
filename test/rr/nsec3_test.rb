@@ -17,7 +17,7 @@ class RR_NSEC3_Test < DNS::Zone::TestCase
 
   end
 
-  def test_load_rr__nsec
+  def test_load_rr__nsec3
     rr = DNS::Zone::RR::NSEC3.new.load("foo.example.com. IN NSEC3 1 0 12 aabbccdd ji6neoaepv8b5o6k4ev33abha8ht9fgc A AAAA")
     assert_equal 'foo.example.com.', rr.label
     assert_equal 'NSEC3', rr.type
