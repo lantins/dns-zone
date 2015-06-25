@@ -93,7 +93,7 @@ Special thanks to Peter J. Philipp [centroid.eu](http://centroid.eu) for sponsor
     [ ] Add support for DNSSEC (RFC 4034) RR Types:
         [x] DNSKEY
             [ ] Algorithm may be integer or mnemonic.
-        [ ] RRSIG
+        [x] RRSIG
             [ ] Algorithm may be integer or mnemonic.
         [ ] NSEC
             [ ] Pay attention to Type Bit Maps field, especially when mnemonic is not known.
