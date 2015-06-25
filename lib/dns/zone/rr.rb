@@ -7,7 +7,7 @@ module DNS
 
       REGEX_TTL = /\d+[wdmhs]?/i
       REGEX_KLASS = /(?<klass>IN)?/i
-      REGEX_TYPE = /(?<type>A|AAAA|CDNSKEY|CDS|CNAME|DLV|DNSKEY|DS|HINFO|MX|NAPTR|NS|NSEC|RRSIG|SOA|SPF|SRV|SSHFP|TXT|PTR)\s{1}/i
+      REGEX_TYPE = /(?<type>A|AAAA|CDNSKEY|CDS|CNAME|DLV|DNSKEY|DS|HINFO|MX|NAPTR|NS|NSEC|NSEC3|RRSIG|SOA|SPF|SRV|SSHFP|TXT|PTR)\s{1}/i
       REGEX_RR = /^(?<label>\S+|\s{1})\s*(?<ttl>#{REGEX_TTL})?\s*#{REGEX_KLASS}\s*#{REGEX_TYPE}\s*(?<rdata>[\s\S]*)$/i
       REGEX_DOMAINNAME = /\S+\./i
       REGEX_STRING = /((?:[^"\\]+|\\.)*)/
@@ -43,6 +43,7 @@ module DNS
         when 'NAPTR'   then NAPTR.new.load(string, options)
         when 'NS'      then NS.new.load(string, options)
         when 'NSEC'    then NSEC.new.load(string, options)
+        when 'NSEC3'   then NSEC3.new.load(string, options)
         when 'PTR'     then PTR.new.load(string, options)
         when 'RRSIG'   then RRSIG.new.load(string, options)
         when 'SOA'     then SOA.new.load(string, options)
@@ -70,6 +71,7 @@ module DNS
       autoload :NAPTR,   'dns/zone/rr/naptr'
       autoload :NS,      'dns/zone/rr/ns'
       autoload :NSEC,    'dns/zone/rr/nsec'
+      autoload :NSEC3,   'dns/zone/rr/nsec3'
       autoload :PTR,     'dns/zone/rr/ptr'
       autoload :RRSIG,   'dns/zone/rr/rrsig'
       autoload :SOA,     'dns/zone/rr/soa'

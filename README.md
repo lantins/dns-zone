@@ -99,13 +99,16 @@ Special thanks to Peter J. Philipp [centroid.eu](http://centroid.eu) for sponsor
             [ ] Handle "Type Bit Maps" better, much better...
         [x] DS
     [ ] Add support for DNSSEC (RFC 5155) RR Types:
-        [ ] NSEC3
+        [x] NSEC3
         [ ] NSEC3PARAM
+        [ ] Correctly handle "Presentation Format" as defined in RFC.
 
     [x] Add support for DNSSEC (RFC 4431 & RFC 7344) RR Types:
         [x] CDNSKEY (identical to DNSKEY)
         [x] CDS (identical to DS)
         [x] DLV (identical to DS)
+
+    [ ] Look at newly added DNSSEC RR's and rename fields to be more appropriate, where required.
 
 ## Would be nice
 
