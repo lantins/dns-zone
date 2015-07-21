@@ -53,8 +53,10 @@ EOL
   ZONE_FILE_BASIC_EXAMPLE =<<-EOL
 @ IN SOA ns0.lividpenguin.com. luke.lividpenguin.com. ( 2013101406 12h 15m 3w 3h )
 @ IN NS ns0.lividpenguin.com.
+@ IN MX 10 mail
+@ IN MX 99 mx.fakemx.net.
 @ IN A 78.47.253.85
-mail IN MX 99 mx.fakemx.net.
+mail IN A 78.47.253.85
 EOL
 
   def test_create_new_instance
