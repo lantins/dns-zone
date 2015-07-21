@@ -9,7 +9,7 @@ module DNS
       REGEX_KLASS = /(?<klass>IN)?/i
       REGEX_TYPE = /(?<type>A|AAAA|CDNSKEY|CDS|CNAME|DLV|DNSKEY|DS|HINFO|MX|NAPTR|NS|NSEC|NSEC3|NSEC3PARAM|RRSIG|SOA|SPF|SRV|SSHFP|TXT|PTR)\s{1}/i
       REGEX_RR = /^(?<label>\S+|\s{1})\s*(?<ttl>#{REGEX_TTL})?\s*#{REGEX_KLASS}\s*#{REGEX_TYPE}\s*(?<rdata>[\s\S]*)$/i
-      REGEX_DOMAINNAME = /\S+\./i
+      REGEX_DOMAINNAME = /\S+\.?/i
       REGEX_STRING = /((?:[^"\\]+|\\.)*)/
       REGEX_CHARACTER_STRING = %r{
         "#{DNS::Zone::RR::REGEX_STRING}"|#{DNS::Zone::RR::REGEX_STRING}
