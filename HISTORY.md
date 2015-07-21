@@ -9,6 +9,7 @@ Development sponsored by Peter J. Philipp [centroid.eu](http://centroid.eu)
     - RFC 7344: CDNSKEY, CDS
     - RFC 4431: DLV
     - RFC 5155: NSEC3, NSEC3PARAM
+* Allow unqualified `domain-name` labels.
 
 # 0.1.4 (no gem release)
 
