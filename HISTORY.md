@@ -10,6 +10,7 @@ Development sponsored by Peter J. Philipp [centroid.eu](http://centroid.eu)
     - RFC 4431: DLV
     - RFC 5155: NSEC3, NSEC3PARAM
 * Allow unqualified `domain-name` labels.
+* Allow `ORIGIN` to be specified as an optional parameter when loading a zone, e.g. `zone = DNS::Zone.load(zone_as_string, 'example.com.')`
 
 # 0.1.4 (no gem release)
 

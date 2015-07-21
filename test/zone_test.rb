@@ -54,6 +54,7 @@ EOL
 @ IN SOA ns0.lividpenguin.com. luke.lividpenguin.com. ( 2013101406 12h 15m 3w 3h )
 @ IN NS ns0.lividpenguin.com.
 @ IN A 78.47.253.85
+mail IN MX 99 mx.fakemx.net.
 EOL
 
   def test_create_new_instance
@@ -82,6 +83,20 @@ EOL
     dump = zone.dump
     # check input matches output.
     assert_equal ZONE_FILE_BASIC_EXAMPLE, dump, 'loaded zone file should match dumped zone file'
+  end
+
+  def test_load_zone_with_origin_param
+    # --- zone without $ORIGIN directive
+
+    zone = DNS::Zone.load(ZONE_FILE_BASIC_EXAMPLE, 'lividpenguin.com.')
+    dump = zone.dump
+    assert_equal ZONE_FILE_BASIC_EXAMPLE, dump, 'loaded zone file should match dumped zone file'
+    assert_equal 'lividpenguin.com.', zone.origin, 'check origin matches example input'
+
+    # --- zone with $ORIGIN directive
+
+    zone = DNS::Zone.load(ZONE_FILE_EXAMPLE, 'ignore.this.origin.favor.zone.com.')
+    assert_equal 'lividpenguin.com.', zone.origin, 'origin should come from test zone, not passed param'
   end
 
   def test_load_zone

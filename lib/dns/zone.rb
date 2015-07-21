@@ -81,7 +81,7 @@ module DNS
     # Load the provided zone file data into a new DNS::Zone object.
     #
     # @api public
-    def self.load(string)
+    def self.load(string, default_origin = "")
       # get entries
       entries = self.extract_entries(string)
 
@@ -89,23 +89,27 @@ module DNS
 
       options = {}
       entries.each do |entry|
+        # read in special statments like $TTL and $ORIGIN
         if entry =~ /\$(ORIGIN|TTL)\s+(.+)/
           instance.ttl    = $2 if $1 == 'TTL'
           instance.origin = $2 if $1 == 'ORIGIN'
           next
         end
 
+        # parse each RR and create a Ruby object for it
         if entry =~ DNS::Zone::RR::REGEX_RR
           rec = DNS::Zone::RR.load(entry, options)
           next unless rec
           instance.records << rec
           options[:last_label] = rec.label
         end
-
       end
 
-      # read in special statments like $TTL and $ORIGIN
-      # parse each RR and create a Ruby object for it
+      # use default_origin if we didn't see a ORIGIN directive in the zone
+      if instance.origin.to_s.empty? && !default_origin.empty?
+        instance.origin = default_origin
+      end
+
       return instance
     end
 
