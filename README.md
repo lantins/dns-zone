@@ -28,6 +28,10 @@ Require the gem in your code:
 
     zone = DNS::Zone.load(zone_as_string)
 
+### Loading a zone file, without an `$ORIGIN` directive
+
+    zone = DNS::Zone.load(zone_as_string, "example.com.")
+
 ### Creating a new zone programmatically
 
     zone = DNS::Zone.new
