@@ -1,5 +1,7 @@
 ## HEAD
 
+## 0.2.0 (2015-10-20)
+
 Development sponsored by Peter J. Philipp [centroid.eu](http://centroid.eu)
 
 * Add support for DNSSEC focused RR Types:
