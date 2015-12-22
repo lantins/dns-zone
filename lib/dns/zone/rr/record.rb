@@ -75,6 +75,10 @@ class DNS::Zone::RR::Record
       @label = captures[:label]
     end
 
+    # unroll records nested under other origins
+    unrolled_origin = options[:last_origin].sub(options[:origin], '').chomp('.') if options[:last_origin]
+    @label = "#{@label}.#{unrolled_origin}" if unrolled_origin && !unrolled_origin.empty?
+
     @ttl = captures[:ttl]
     captures[:rdata]
   end
