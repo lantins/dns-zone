@@ -59,6 +59,36 @@ EOL
 mail IN A 78.47.253.85
 EOL
 
+  # zone file with multiple zones
+  ZONE_FILE_MULTIPLE_ORIGINS_EXAMPLE =<<-EOL
+$ORIGIN lividpenguin.com.
+$TTL 3d
+@           IN  SOA  ns0.lividpenguin.com. luke.lividpenguin.com. (
+                           2013101406 ; zone serial number
+                           12h        ; refresh ttl
+                           15m        ; retry ttl
+                           3w         ; expiry ttl
+                           3h         ; minimum ttl
+                         )
+
+@           IN  NS    ns0.lividpenguin.com.
+@           IN  NS    ns1.lividpenguin.com.
+@           IN  NS    ns2.lividpenguin.com.
+
+@           IN  A     78.47.253.85
+www         IN  A     78.47.253.85
+
+foo         IN  TXT   "part1""part2"
+
+$ORIGIN sub.lividpenguin.com.
+app1                    60 A     1.2.3.4
+app2                    60 A     1.2.3.5
+app3                    60 A     1.2.3.6
+$ORIGIN another.lividpenguin.com.
+app1                    60 A     4.3.2.1
+
+EOL
+
   def test_create_new_instance
     assert DNS::Zone.new
   end
@@ -99,6 +129,14 @@ EOL
 
     zone = DNS::Zone.load(ZONE_FILE_EXAMPLE, 'ignore.this.origin.favor.zone.com.')
     assert_equal 'lividpenguin.com.', zone.origin, 'origin should come from test zone, not passed param'
+  end
+
+  def test_load_zone_labels_are_correct
+    zone = DNS::Zone.load(ZONE_FILE_BASIC_EXAMPLE, 'lividpenguin.com.')
+    assert_equal 'mail', zone.records[5].label, 'check label is correct'
+
+    zone = DNS::Zone.load(ZONE_FILE_EXAMPLE)
+    assert_equal 'ns0', zone.records[7].label, 'check label is correct'
   end
 
   def test_load_zone
@@ -147,6 +185,16 @@ EOL
     assert_equal '*', record.label
     assert_equal 'A', record.type
     assert_equal '78.47.253.85', record.address
+  end
+
+  def test_load_multiple_origins
+    zone = DNS::Zone.load(ZONE_FILE_MULTIPLE_ORIGINS_EXAMPLE)
+    assert_equal 'lividpenguin.com.', zone.origin
+    assert_equal 11, zone.records.length, 'we should have multiple records (including SOA)'
+    assert_equal 'app1.sub', zone.records[7].label
+    assert_equal '1.2.3.4', zone.records[7].address
+    assert_equal 'app1.another', zone.records[10].label
+    assert_equal '4.3.2.1', zone.records[10].address
   end
 
   def test_extract_entry_from_one_line

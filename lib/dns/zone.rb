@@ -92,7 +92,11 @@ module DNS
         # read in special statments like $TTL and $ORIGIN
         if entry =~ /\$(ORIGIN|TTL)\s+(.+)/
           instance.ttl    = $2 if $1 == 'TTL'
-          instance.origin = $2 if $1 == 'ORIGIN'
+          if $1 == 'ORIGIN'
+            instance.origin ||= $2
+            options[:origin] ||= $2
+            options[:last_origin] = $2
+          end
           next
         end
 
