@@ -1,5 +1,10 @@
 ## HEAD
 
+## 0.3.0 (2015-12-23)
+
+* Requires Ruby version >= 2.0
+* Ability to parse zone file with multiple `ORIGIN` directives.
+
 ## 0.2.0 (2015-10-20)
 
 Development sponsored by Peter J. Philipp [centroid.eu](http://centroid.eu)

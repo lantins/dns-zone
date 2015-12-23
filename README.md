@@ -116,7 +116,6 @@ Special thanks to Peter J. Philipp [centroid.eu](http://centroid.eu) for sponsor
 
 ## Would be nice
 
-    [ ] Handle parsing a zone file that uses more then one $ORIGIN directive.
     [ ] Basic validation, error checking:
         [ ] Only one SOA per zone.
         [ ] CNAMEs can't use a label of `@`.
