@@ -19,7 +19,7 @@ spec = Gem::Specification.new do |s|
   #s.default_executable  = 'dns-zone'
 
   # min ruby version
-  #s.required_ruby_version = ::Gem::Requirement.new(">= 1.9")
+  s.required_ruby_version = ::Gem::Requirement.new(">= 2.0")
 
   # cross platform gem dependencies
   #s.add_dependency('gli')
