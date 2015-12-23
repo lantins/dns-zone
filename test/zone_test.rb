@@ -85,6 +85,7 @@ app1                    60 A     1.2.3.4
 app2                    60 A     1.2.3.5
 app3                    60 A     1.2.3.6
 $ORIGIN another.lividpenguin.com.
+@                     3600 A     1.1.1.1
 app1                    60 A     4.3.2.1
 
 EOL
@@ -190,11 +191,13 @@ EOL
   def test_load_multiple_origins
     zone = DNS::Zone.load(ZONE_FILE_MULTIPLE_ORIGINS_EXAMPLE)
     assert_equal 'lividpenguin.com.', zone.origin
-    assert_equal 11, zone.records.length, 'we should have multiple records (including SOA)'
+    assert_equal 12, zone.records.length, 'we should have multiple records (including SOA)'
     assert_equal 'app1.sub', zone.records[7].label
     assert_equal '1.2.3.4', zone.records[7].address
-    assert_equal 'app1.another', zone.records[10].label
-    assert_equal '4.3.2.1', zone.records[10].address
+    assert_equal 'another', zone.records[10].label
+    assert_equal '1.1.1.1', zone.records[10].address
+    assert_equal 'app1.another', zone.records[11].label
+    assert_equal '4.3.2.1', zone.records[11].address
   end
 
   def test_extract_entry_from_one_line
