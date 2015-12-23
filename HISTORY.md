@@ -1,5 +1,9 @@
 ## HEAD
 
+## 0.3.1 (2015-12-23)
+
+* Fix edge case when zone file has multiple `ORIGIN` directives.
+
 ## 0.3.0 (2015-12-23)
 
 * Requires Ruby version >= 2.0
